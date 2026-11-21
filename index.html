@@ -99,7 +99,7 @@
       }
     }
     .card {
-      background: #ffffff;
+      background: linear-gradient(90deg, #dce4ef 0%, #e7ecf2 55%, #f0f3f6 100%);
       border-top: 3px solid #4b5320;
       border-radius: 7px;
       padding: 14px 16px;
@@ -109,6 +109,14 @@
       justify-content: space-between;
       gap: 10px;
       min-height: 148px;
+    }
+    .diya-card-slot {
+      grid-column: 3;
+    }
+    @media (max-width: 960px) {
+      .diya-card-slot {
+        grid-column: auto;
+      }
     }
     .card h3 {
       margin: 0 0 6px;
@@ -313,7 +321,7 @@
           <button type="button" class="card-action" onclick="openDiyaGuide()">Отримати консультацію →</button>
         </div>
 
-        <div class="card">
+        <div class="card diya-card-slot">
           <div>
             <h3>Як завантажити та витягти документ у «Дії»</h3>
             <p>Покрокова візуальна інструкція щодо отримання та завантаження документа або витягу в застосунку «Дія».</p>

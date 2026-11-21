@@ -24,10 +24,10 @@
     }
     .corner-badge-wrap {
       position: absolute;
-      top: 6px;
-      right: 16px;
-      width: 148px;
-      height: 156px;
+      top: -6px;
+      right: 22px;
+      width: 104px;
+      height: 112px;
       z-index: 5;
       perspective: 750px;
       transform-style: preserve-3d;
@@ -35,45 +35,21 @@
       align-items: center;
       justify-content: center;
     }
-    .corner-badge-wrap::before {
-      content: "";
-      position: absolute;
-      width: 96px;
-      height: 112px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(20, 24, 10, 0.55) 0%, rgba(45, 56, 18, 0.25) 55%, transparent 75%);
-      filter: blur(8px);
-      transform: translate(3px, 8px);
-      z-index: -1;
-      pointer-events: none;
-    }
     .corner-badge-img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 28px;
       transform: rotateY(-8deg) rotateX(4deg);
       transition: transform 0.35s ease, filter 0.35s ease;
-      -webkit-mask-image:
-        radial-gradient(ellipse 56% 64% at 50% 48%, #000000 44%, rgba(0, 0, 0, 0.72) 66%, transparent 88%),
-        linear-gradient(to right, transparent 0%, #000000 22%, #000000 78%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, #000000 18%, #000000 82%, transparent 100%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        radial-gradient(ellipse 56% 64% at 50% 48%, #000000 44%, rgba(0, 0, 0, 0.72) 66%, transparent 88%);
       filter:
-        contrast(1.06)
-        brightness(0.98)
-        drop-shadow(0 6px 8px rgba(15, 18, 8, 0.6))
-        drop-shadow(3px 10px 14px rgba(0, 0, 0, 0.4));
+        drop-shadow(0 5px 7px rgba(15, 18, 8, 0.58))
+        drop-shadow(2px 8px 12px rgba(0, 0, 0, 0.38));
     }
     .corner-badge-wrap:hover .corner-badge-img {
-      transform: rotateY(-2deg) rotateX(1deg) scale(1.03);
+      transform: rotateY(-2deg) rotateX(1deg) scale(1.04);
       filter:
-        contrast(1.08)
-        brightness(1.02)
-        drop-shadow(0 8px 11px rgba(15, 18, 8, 0.66))
-        drop-shadow(4px 12px 18px rgba(0, 0, 0, 0.45));
+        drop-shadow(0 7px 10px rgba(15, 18, 8, 0.65))
+        drop-shadow(3px 10px 15px rgba(0, 0, 0, 0.44));
     }
     main {
       padding: 16px 0 44px;
@@ -382,78 +358,3 @@
       </section>
     </div>
   </main>
-
-  <footer id="contacts" class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong>Ветеран Голосіївського району</strong>
-        <div>03127, м. Київ, просп. Голосіївський, 42</div>
-        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
-      </div>
-      <div>
-        <strong>Контакти</strong>
-        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const diyaSteps = [
-      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу потрібних послуг або документів." },
-      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "Оберіть відповідний пункт меню для роботи з документами чи довідками." },
-      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Перейдіть у потрібний підрозділ та оберіть формування необхідного витягу чи документа." },
-      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "Підтвердьте запит у застосунку та дочекайтеся формування документа." },
-      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Завантажте або збережіть сформований документ на пристрій." }
-    ];
-
-    let currentDiyaIndex = 0;
-
-    function renderDiyaStep() {
-      const step = diyaSteps[currentDiyaIndex];
-      document.getElementById("diya-step-title").textContent = step.title;
-      document.getElementById("diya-step-desc").textContent = step.desc;
-      document.getElementById("diya-step-img").src = step.img;
-      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
-      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
-      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
-      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
-    }
-
-    function openDiyaGuide() {
-      const guide = document.getElementById("diya-guide");
-      guide.style.display = "block";
-      renderDiyaStep();
-      guide.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function closeDiyaGuide() {
-      document.getElementById("diya-guide").style.display = "none";
-      document.getElementById("diya-all-steps").style.display = "none";
-      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
-    }
-
-    function changeDiyaStep(delta) {
-      const nextIndex = currentDiyaIndex + delta;
-      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
-        currentDiyaIndex = nextIndex;
-        renderDiyaStep();
-      }
-    }
-
-    function toggleAllDiyaSteps() {
-      const box = document.getElementById("diya-all-steps");
-      const btn = document.getElementById("diya-all-btn");
-      if (box.style.display === "block") {
-        box.style.display = "none";
-        btn.textContent = "Показати всі кроки";
-        return;
-      }
-      box.innerHTML = diyaSteps.map(function (s) {
-        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
-      }).join("");
-      box.style.display = "block";
-      btn.textContent = "Сховати всі кроки";
-    }
-  </script>
-</body>
-</html>

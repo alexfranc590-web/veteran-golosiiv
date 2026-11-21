@@ -421,6 +421,85 @@ _____________________________ (ПІБ депутата)
         };
     });
 </script>
+<section id="diya-guide" class="diya-instruction">
+  <h2>Як завантажити та витягти документ у «Дії»</h2>
+  <p>Покрокова інструкція з 5 кроків.</p>
 
+  <div class="diya-controls">
+    <button type="button" id="diya-prev">Назад</button>
+    <span id="diya-counter">Крок 1 з 5</span>
+    <button type="button" id="diya-next">Далі</button>
+    <button type="button" id="diya-show-all">Показати всі кроки</button>
+  </div>
+
+  <div class="diya-step">
+    <h3>Крок 1</h3>
+    <img src="diya-step1.jpg" alt="Крок 1: скріншот з застосунку Дія">
+  </div>
+
+  <div class="diya-step">
+    <h3>Крок 2</h3>
+    <img src="diya-step2.jpg" alt="Крок 2: скріншот з застосунку Дія">
+  </div>
+
+  <div class="diya-step">
+    <h3>Крок 3</h3>
+    <img src="diya-step3.jpg" alt="Крок 3: скріншот з застосунку Дія">
+  </div>
+
+  <div class="diya-step">
+    <h3>Крок 4</h3>
+    <img src="diya-step4.jpg" alt="Крок 4: скріншот з застосунку Дія">
+  </div>
+
+  <div class="diya-step">
+    <h3>Крок 5</h3>
+    <img src="diya-step5.jpg" alt="Крок 5: скріншот з застосунку Дія">
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var steps = document.querySelectorAll("#diya-guide .diya-step");
+    var prevBtn = document.getElementById("diya-prev");
+    var nextBtn = document.getElementById("diya-next");
+    var showAllBtn = document.getElementById("diya-show-all");
+    var counter = document.getElementById("diya-counter");
+    var currentIndex = 0;
+
+    if (!steps.length || !prevBtn || !nextBtn || !counter) return;
+
+    function renderSingleStep(index) {
+      currentIndex = index;
+      steps.forEach(function (step, i) {
+        step.style.display = i === currentIndex ? "block" : "none";
+      });
+      counter.textContent = "Крок " + (currentIndex + 1) + " з " + steps.length;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === steps.length - 1;
+    }
+
+    prevBtn.addEventListener("click", function () {
+      if (currentIndex > 0) renderSingleStep(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", function () {
+      if (currentIndex < steps.length - 1) renderSingleStep(currentIndex + 1);
+    });
+
+    if (showAllBtn) {
+      showAllBtn.addEventListener("click", function () {
+        steps.forEach(function (step) {
+          step.style.display = "block";
+        });
+        counter.textContent = "Усі кроки (" + steps.length + ")";
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      });
+    }
+
+    renderSingleStep(0);
+  });
+</script>
 </body>
 </html>

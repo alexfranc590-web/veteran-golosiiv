@@ -77,7 +77,7 @@
       padding: 16px 0 44px;
     }
     .section-title {
-      margin: 0 0 64px;
+      margin: 0 0 56px;
       font-size: 28px;
       color: #ffffff;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -85,17 +85,20 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 275px));
+      grid-template-rows: repeat(2, auto);
       justify-content: start;
       gap: 14px;
     }
     @media (max-width: 1160px) {
       .cards-grid {
         grid-template-columns: repeat(2, minmax(0, 290px));
+        grid-template-rows: auto;
       }
     }
     @media (max-width: 640px) {
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
       }
     }
     .card {
@@ -296,4 +299,133 @@
             <h3>Лікування та реабілітація</h3>
             <p>Інформація про медичні заклади, лікування та реабілітаційні центри.</p>
           </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Лікування
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Лікування зубів, реабілітація та супровід →</button>
+        </div>
+
+        <div class="card diya-card-slot">
+          <div>
+            <h3>Як завантажити та витягти документ у «Дії»</h3>
+            <p>Покрокова візуальна інструкція щодо отримання та завантаження документа або витягу в застосунку «Дія».</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити покрокову інструкцію →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Пільги ветеранам</h3>
+            <p>Соціальні гарантії, компенсації та передбачені законом пільги.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Переглянути перелік пільг →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Депутати Голосіївського району</h3>
+            <p>Контакти депутатів, графік прийому та подання звернень.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Графік та звернення →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Юридична допомога</h3>
+            <p>Безоплатні юридичні консультації та правова підтримка.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Отримати консультацію →</button>
+        </div>
+      </div>
+
+      <section id="diya-guide" aria-label="Як завантажити та витягти документ у Дії">
+        <div class="diya-header">
+          <h2 id="diya-step-title">Крок 1 з 5</h2>
+          <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
+        </div>
+        <p id="diya-step-desc"></p>
+        <div class="diya-step">
+          <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
+        </div>
+        <div class="diya-controls">
+          <button type="button" id="diya-prev" onclick="changeDiyaStep(-1)">Назад</button>
+          <span id="diya-counter">1 / 5</span>
+          <button type="button" id="diya-next" onclick="changeDiyaStep(1)">Далі</button>
+          <button type="button" id="diya-all-btn" onclick="toggleAllDiyaSteps()">Показати всі кроки</button>
+        </div>
+        <div id="diya-all-steps"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contacts" class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Ветеран Голосіївського району</strong>
+        <div>03127, м. Київ, просп. Голосіївський, 42</div>
+        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
+      </div>
+      <div>
+        <strong>Контакти</strong>
+        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const diyaSteps = [
+      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу потрібних послуг або документів." },
+      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "Оберіть відповідний пункт меню для роботи з документами чи довідками." },
+      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Перейдіть у потрібний підрозділ та оберіть формування необхідного витягу чи документа." },
+      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "Підтвердьте запит у застосунку та дочекайтеся формування документа." },
+      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Завантажте або збережіть сформований документ на пристрій." }
+    ];
+
+    let currentDiyaIndex = 0;
+
+    function renderDiyaStep() {
+      const step = diyaSteps[currentDiyaIndex];
+      document.getElementById("diya-step-title").textContent = step.title;
+      document.getElementById("diya-step-desc").textContent = step.desc;
+      document.getElementById("diya-step-img").src = step.img;
+      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
+      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
+    }
+
+    function openDiyaGuide() {
+      const guide = document.getElementById("diya-guide");
+      guide.style.display = "block";
+      renderDiyaStep();
+      guide.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function closeDiyaGuide() {
+      document.getElementById("diya-guide").style.display = "none";
+      document.getElementById("diya-all-steps").style.display = "none";
+      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
+    }
+
+    function changeDiyaStep(delta) {
+      const nextIndex = currentDiyaIndex + delta;
+      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
+        currentDiyaIndex = nextIndex;
+        renderDiyaStep();
+      }
+    }
+
+    function toggleAllDiyaSteps() {
+      const box = document.getElementById("diya-all-steps");
+      const btn = document.getElementById("diya-all-btn");
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        btn.textContent = "Показати всі кроки";
+        return;
+      }
+      box.innerHTML = diyaSteps.map(function (s) {
+        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
+      }).join("");
+      box.style.display = "block";
+      btn.textContent = "Сховати всі кроки";
+    }
+  </script>
+</body>
+</html>

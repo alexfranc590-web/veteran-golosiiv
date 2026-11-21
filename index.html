@@ -1,505 +1,396 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ветеран Голосіївського району</title>
-   <link id="dynamic-favicon" rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ветеран Голосіївського району</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f5f2;
+      color: #1f2419;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .site-header {
+      background: #ffffff;
+      border-bottom: 2px solid #4b5320;
+      padding: 14px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #1f2419;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #4b5320;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2f3822;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      color: #6b8e23;
+    }
+    main {
+      padding: 36px 0 48px;
+    }
+    .section-title {
+      margin: 0 0 24px;
+      font-size: 28px;
+      color: #1f2419;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: #ffffff;
+      border-top: 3px solid #4b5320;
+      border-radius: 6px;
+      padding: 22px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      color: #1a1f14;
+    }
+    .card p {
+      margin: 0;
+      color: #4a5242;
+      font-size: 14px;
+    }
+    .card-action {
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      color: #2e6b1e;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .card-action:hover {
+      text-decoration: underline;
+      color: #4b5320;
+    }
+    #diya-guide {
+      display: none;
+      max-width: 560px;
+      margin: 32px auto 0;
+      padding: 24px;
+      background: #ffffff;
+      border: 2px solid #4b5320;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .diya-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .diya-header h3 {
+      margin: 0;
+      color: #4b5320;
+      font-size: 20px;
+    }
+    .diya-close {
+      background: #ecefe8;
+      color: #1f2419;
+      border: 1px solid #c6cdb9;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #diya-step-desc {
+      margin: 0 0 16px;
+      color: #363d2e;
+      font-size: 15px;
+    }
+    .diya-step img {
+      max-width: 100%;
+      max-height: 460px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d5dacd;
+    }
+    .diya-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .diya-controls button {
+      background: #6b8e23;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .diya-controls button:hover:not(:disabled) {
+      background: #4b5320;
+    }
+    .diya-controls button:disabled {
+      background: #c5c9be;
+      cursor: not-allowed;
+    }
+    #diya-counter {
+      font-weight: 700;
+      min-width: 52px;
+    }
+    #diya-all-steps {
+      display: none;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e0e5d8;
+    }
+    .all-step-item {
+      margin-bottom: 18px;
+    }
+    .all-step-item img {
+      max-width: 100%;
+      max-height: 380px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d5dacd;
+    }
+    .site-footer {
+      background: #070806;
+      color: #ffffff;
+      padding: 28px 0;
+      font-size: 14px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-muted {
+      color: #b8bdb3;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+  </style>
 </head>
-
 <body>
-
-<header class="site-header">
-    <h1 id="site-title">Ветеран Голосіївського району</h1>
-    <div class="top-menu">
-        <button type="button" class="lang-btn active" onclick="setLanguage('uk', this)">UKR</button> |
-        <button type="button" class="lang-btn" onclick="setLanguage('en', this)">ENG</button> |
-        <button type="button" id="accessibility-btn" onclick="toggleAccessibility()">Людям із порушенням зору</button>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#veteranam" class="brand">
+        <img src="favicon.png" alt="Герб порталу" class="brand-icon">
+        <span>Ветеран Голосіївського району</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#veteranam">Ветеранам</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<nav>
-    <a href="#top" id="nav-home">Головна</a>
-    <a href="#veterans" id="nav-veterans">Ветеранам</a>
-    <a href="#" id="nav-forms" onclick="openModal('forms-modal'); return false;">Зразки заяв</a>
-    <a href="#kyiv" id="nav-kyiv">Допомога Києва</a>
-    <a href="#district" id="nav-district">Голосіївський район</a>
-    <a href="#contacts" id="nav-contacts">Контакти</a>
-</nav>
+  <main id="veteranam">
+    <div class="container">
+      <h1 class="section-title">Ветеранам</h1>
 
-<main id="top">
-    <div class="emblem-zone">
-        <div class="emblem-circle">
-            <img src="emblem.jpg" alt="Ветеран Голосіївського району" class="emblem-circle-img">
+      <div class="cards-grid">
+        <div class="card">
+          <div>
+            <h3>Зразки заяв</h3>
+            <p>Заяви на матеріальну допомогу, лікування, реабілітацію та звернення до установ Голосіївського району.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Натисніть, щоб відкрити зразок та перелік документів →</button>
         </div>
+
+        <div class="card">
+          <div>
+            <h3>Допомога громади Києва</h3>
+            <p>Матеріальна підтримка та міські програми для ветеранів.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Детальніше про програми підтримки →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Лікування та реабілітація</h3>
+            <p>Інформація про медичні заклади, лікування та реабілітаційні центри.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Лікування зубів, реабілітація та супровід →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Пільги ветеранам</h3>
+            <p>Соціальні гарантії, компенсації та передбачені законом пільги.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Переглянути перелік пільг →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Депутати Голосіївського району</h3>
+            <p>Контакти депутатів, графік прийому та подання звернень.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Графік та звернення →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Юридична допомога</h3>
+            <p>Безоплатні юридичні консультації та правова підтримка.</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Отримати консультацію →</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Як завантажити та витягти документ у «Дії»</h3>
+            <p>Покрокова візуальна інструкція щодо отримання та завантаження документа або витягу в застосунку «Дія».</p>
+          </div>
+          <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити покрокову інструкцію →</button>
+        </div>
+      </div>
+
+      <section id="diya-guide" aria-label="Як завантажити та витягти документ у Дії">
+        <div class="diya-header">
+          <h2 id="diya-step-title">Крок 1 з 5</h2>
+          <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
+        </div>
+        <p id="diya-step-desc"></p>
+        <div class="diya-step">
+          <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
+        </div>
+        <div class="diya-controls">
+          <button type="button" id="diya-prev" onclick="changeDiyaStep(-1)">Назад</button>
+          <span id="diya-counter">1 / 5</span>
+          <button type="button" id="diya-next" onclick="changeDiyaStep(1)">Далі</button>
+          <button type="button" id="diya-all-btn" onclick="toggleAllDiyaSteps()">Показати всі кроки</button>
+        </div>
+        <div id="diya-all-steps"></div>
+      </section>
     </div>
+  </main>
 
-    <section class="hero">
-        <p class="intro" id="hero-intro">
-            Місто Київ. Корисна інформація, пільги, зразки документів та контакти.
-        </p>
-    </section>
-
-    <section class="services" id="veterans">
-        <h2 id="section-title">Ветеранам</h2>
-
-        <div class="services-grid">
-            <div class="service clickable" id="forms" onclick="openModal('forms-modal')">
-                <h3 id="card1-title">Зразки заяв</h3>
-                <p id="card1-text">
-                    Заяви на матеріальну допомогу, лікування, реабілітацію та звернення до установ Голосіївського району.
-                </p>
-                <span class="card-action" id="card1-action">Натисніть, щоб відкрити зразок та перелік документів &rarr;</span>
-            </div>
-
-            <div class="service" id="kyiv">
-                <h3 id="card2-title">Допомога громади Києва</h3>
-                <p id="card2-text">
-                    Матеріальна підтримка та міські програми для ветеранів.
-                </p>
-            </div>
-
-            <div class="service clickable" id="rehab" onclick="openModal('rehab-modal')">
-                <h3 id="card3-title">Лікування та реабілітація</h3>
-                <p id="card3-text">
-                    Інформація про медичні заклади, лікування та реабілітаційні центри.
-                </p>
-                <span class="card-action" id="card3-action">Лікування зубів, реабілітація та супровід &rarr;</span>
-            </div>
-
-            <div class="service">
-                <h3 id="card4-title">Пільги ветеранам</h3>
-                <p id="card4-text">
-                    Соціальні гарантії, компенсації та передбачені законом пільги.
-                </p>
-            </div>
-
-            <div class="service" id="district">
-                <h3 id="card5-title">Депутати Голосіївського району</h3>
-                <p id="card5-text">
-                    Контакти депутатів, графік прийому та подання звернень.
-                </p>
-            </div>
-
-            <div class="service" id="contacts">
-                <h3 id="card6-title">Юридична допомога</h3>
-                <p id="card6-text">
-                    Безоплатні юридичні консультації та правова підтримка.
-                </p>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- ВІКНО ЗІ ЗРАЗКАМИ ЗАЯВ -->
-<div id="forms-modal" class="modal" onclick="closeModalOnBg(event, 'forms-modal')">
-    <div class="modal-content">
-        <button type="button" class="close-btn" onclick="closeModal('forms-modal')">&times;</button>
-        <h2>Зразок заяви на матеріальну допомогу</h2>
-        <p class="modal-note">Заяву можна писати у довільній формі на ім'я депутата Київської міської ради.</p>
-
-        <div class="modal-actions">
-            <a href="docs/Депутату Київської міської ради.pdf" download class="btn-download">Завантажити бланк (PDF)</a>
-            <button type="button" class="btn-copy" onclick="copyTemplateText()" id="copy-btn">Скопіювати текст заяви</button>
-        </div>
-
-        <div class="template-box" id="template-text">
-            <div class="template-header">
-                Депутату Київської міської ради<br>
-                <strong>_____________________________</strong><br>
-                <span class="hint">(ПІБ депутата, наприклад: Галайчуку І.В.)</span><br><br>
-                від <strong>_____________________________</strong><br>
-                <span class="hint">(Ваше ПІБ)</span><br>
-                Адреса: <strong>_________________________</strong><br>
-                моб. тел.: <strong>_______________________</strong>
-            </div>
-            <div class="template-title">Заява</div>
-            <div class="template-body">
-                Прошу надати мені матеріальну допомогу <strong>_________________________________________________</strong><br>
-                <span class="hint">(вкажіть Вашу причину для отримання матеріальної допомоги)</span><br><br>
-                Даю свою згоду Київській міській раді та одержувачам на обробку та зберігання моїх персональних даних.<br><br>
-                <div class="template-footer">
-                    <span>Дата: «___» __________ 2026 р.</span>
-                    <span>Підпис: ______________</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-block">
-            <h3>Перелік необхідних документів:</h3>
-            <ul>
-                <li>Заява на ім'я депутата Київської міської ради зі згодою на обробку персональних даних.</li>
-                <li>Копія паспорта та РНОКПП (ідентифікаційного номера).</li>
-                <li>Витяг з реєстру територіальної громади про місце проживання або довідка ВПО в м. Київ.</li>
-                <li>Копія посвідчення, що підтверджує пільгу (УБД, особа з інвалідністю тощо).</li>
-                <li>Довідка ОК-5 або довідка про доходи за останні 6 місяців.</li>
-                <li>Документи, що підтверджують складні життєві обставини (медичні виписки).</li>
-                <li>Реквізити банківського рахунка (IBAN).</li>
-            </ul>
-        </div>
+  <footer id="contacts" class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Ветеран Голосіївського району</strong>
+        <div>03127, м. Київ, просп. Голосіївський, 42</div>
+        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
+      </div>
+      <div>
+        <strong>Контакти</strong>
+        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
+      </div>
     </div>
-</div>
+  </footer>
 
-<!-- ВІКНО: ЛІКУВАННЯ, ЗУБОПРОТЕЗУВАННЯ ТА РЕАБІЛІТАЦІЯ -->
-<div id="rehab-modal" class="modal" onclick="closeModalOnBg(event, 'rehab-modal')">
-    <div class="modal-content">
-        <button type="button" class="close-btn" onclick="closeModal('rehab-modal')">&times;</button>
-        <h2 id="modal-rehab-title">Лікування, зубопротезування та реабілітація</h2>
-        <p class="modal-note" id="modal-rehab-desc">Повна інформація про безоплатну медичну допомогу, реабілітаційні центри та протезування для ветеранів:</p>
+  <script>
+    const diyaSteps = [
+      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу потрібних послуг або документів." },
+      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "Оберіть відповідний пункт меню для роботи з документами чи довідками." },
+      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Перейдіть у потрібний підрозділ та оберіть формування необхідного витягу чи документа." },
+      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "Підтвердьте запит у застосунку та дочекайтеся формування документа." },
+      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Завантажте або збережіть сформований документ на пристрій." }
+    ];
 
-        <div class="info-block">
-            <h3>🦷 Безоплатне лікування зубів та протезування (НСЗУ):</h3>
-            <ul>
-                <li><strong>Хто має право:</strong> Учасники бойових дій (УБД), особи з інвалідністю внаслідок війни та військовослужбовці.</li>
-                <li><strong>Зуболікування:</strong> Послуги на суму до 24 952 грн (терапевтична стоматологія, знеболення, рентген).</li>
-                <li><strong>Зубопротезування:</strong> Послуги на суму до 34 966 грн (встановлення протезів та коронок).</li>
-                <li><strong>Як отримати:</strong> Направлення від лікаря-стоматолога не потрібне, зверніться до лікарні з договором НСЗУ. Гаряча лінія НСЗУ: <strong>16-77</strong>.</li>
-            </ul>
-        </div>
+    let currentDiyaIndex = 0;
 
-        <div class="info-block">
-            <h3>🏥 Фізична та психологічна реабілітація:</h3>
-            <ul>
-                <li><strong>Безоплатні послуги:</strong> Стаціонарна та амбулаторна реабілітація за пакетами НСЗУ (відновлення після поранень та травм).</li>
-                <li><strong>Як направити:</strong> Направлення формує лікуючий лікар (сімейний або профільний спеціаліст).</li>
-                <li><strong>Психологічна допомога:</strong> Безоплатна підтримка ветеранів та членів їхніх сімей.</li>
-            </ul>
-        </div>
-
-        <ul class="docs-list">
-            <li>
-                <a href="https://nszu.gov.ua/dashboards/elektronna-karta-misc-nadannia-poslug-za-programoiu" target="_blank" rel="noopener noreferrer">
-                    🗺️ Інтерактивна мапа НСЗУ (знайти клініки зі стоматології та реабілітації)
-                </a>
-            </li>
-            <li>
-                <a href="https://kyivcity.gov.ua/veteranam_ta_khnim_rodinam/derzhavni_programi/viyskovi_ta_veterani_mozhut_bezoplatno_likuvati_zubi_v_100_stomatologichnikh_zakladakh_ukrani_1010283/" target="_blank" rel="noopener noreferrer">
-                    🏛️ Портал КМДА: де лікувати зуби та проходити реабілітацію в Києві
-                </a>
-            </li>
-            <li>
-                <a href="https://mva.gov.ua/" target="_blank" rel="noopener noreferrer">
-                    🎖️ Міністерство у справах ветеранів: програми підтримки та реабілітації
-                </a>
-            </li>
-            <li>
-                <a href="https://vcentri.com/" target="_blank" rel="noopener noreferrer">
-                    🌐 Мережа громадських центрів «Vcentri Hub» у Києві
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<!-- ЧОРНИЙ ФУТЕР ДЛЯ ГОЛОСІЇВСЬКОГО РАЙОНУ -->
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-col">
-            <h3 class="footer-title">Ветеран Голосіївського району</h3>
-            <p class="footer-address">03127, м. Київ, просп. Голосіївський, 42</p>
-            <p class="footer-copy">&copy; 2026 Інформаційний портал для ветеранів.</p>
-        </div>
-        <div class="footer-col footer-right">
-            <h4 class="footer-contacts-heading">Контакти</h4>
-            <div class="social-icons">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon">
-                    <i class="bi bi-facebook"></i>
-                </a>
-            </div>
-            <p class="footer-email">Електронна пошта:<br><strong>holosiiv.veteran@gmail.com</strong></p>
-        </div>
-    </div>
-</footer>
-
-<script>
-    function openModal(modalId) {
-        document.getElementById(modalId).style.display = 'flex';
+    function renderDiyaStep() {
+      const step = diyaSteps[currentDiyaIndex];
+      document.getElementById("diya-step-title").textContent = step.title;
+      document.getElementById("diya-step-desc").textContent = step.desc;
+      document.getElementById("diya-step-img").src = step.img;
+      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
+      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
     }
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
+    function openDiyaGuide() {
+      const guide = document.getElementById("diya-guide");
+      guide.style.display = "block";
+      renderDiyaStep();
+      guide.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    function closeModalOnBg(event, modalId) {
-        if (event.target.id === modalId) {
-            closeModal(modalId);
-        }
+    function closeDiyaGuide() {
+      document.getElementById("diya-guide").style.display = "none";
+      document.getElementById("diya-all-steps").style.display = "none";
+      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
     }
 
-    function copyTemplateText() {
-        const textToCopy =
-`Депутату Київської міської ради
-_____________________________ (ПІБ депутата)
-від _____________________________ (Ваше ПІБ)
-Адреса: _________________________
-моб. тел.: _______________________
-
-Заява
-
-Прошу надати мені матеріальну допомогу _________________________________________________ (вкажіть причину).
-
-Даю свою згоду Київській міській раді та одержувачам на обробку та зберігання моїх персональних даних.
-
-Дата: «___» __________ 2026 р.          Підпис: ______________`;
-
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const btn = document.getElementById('copy-btn');
-            const oldText = btn.textContent;
-            btn.textContent = 'Текст скопійовано!';
-            btn.style.background = '#198754';
-            setTimeout(() => {
-                btn.textContent = oldText;
-                btn.style.background = '';
-            }, 2500);
-        });
+    function changeDiyaStep(delta) {
+      const nextIndex = currentDiyaIndex + delta;
+      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
+        currentDiyaIndex = nextIndex;
+        renderDiyaStep();
+      }
     }
 
-    const translations = {
-        uk: {
-            title: "Ветеран Голосіївського району",
-            accessBtn: "Людям із порушенням зору",
-            accessBtnActive: "Звичайна версія сайту",
-            navHome: "Головна",
-            navVeterans: "Ветеранам",
-            navForms: "Зразки заяв",
-            navKyiv: "Допомога Києва",
-            navDistrict: "Голосіївський район",
-            navContacts: "Контакти",
-            heroIntro: "Місто Київ. Корисна інформація, пільги, зразки документів та контакти.",
-            sectionTitle: "Ветеранам",
-            card1Title: "Зразки заяв",
-            card1Text: "Заяви на матеріальну допомогу, лікування, реабілітацію та звернення до установ Голосіївського району.",
-            card1Action: "Натисніть, щоб відкрити зразок та перелік документів →",
-            card2Title: "Допомога громади Києва",
-            card2Text: "Матеріальна підтримка та міські програми для ветеранів.",
-            card3Title: "Лікування та реабілітація",
-            card3Text: "Інформація про медичні заклади, лікування та реабілітаційні центри.",
-            card3Action: "Лікування зубів, реабілітація та супровід →",
-            modalRehabTitle: "Лікування, зубопротезування та реабілітація",
-            modalRehabDesc: "Повна інформація про безоплатну медичну допомогу, реабілітаційні центри та протезування для ветеранів:",
-            card4Title: "Пільги ветеранам",
-            card4Text: "Соціальні гарантії, компенсації та передбачені законом пільги.",
-            card5Title: "Депутати Голосіївського району",
-            card5Text: "Контакти депутатів, графік прийому та подання звернень.",
-            card6Title: "Юридична допомога",
-            card6Text: "Безоплатні юридичні консультації та правова підтримка."
-        },
-        en: {
-            title: "Veteran of Holosiivskyi District",
-            accessBtn: "For Visually Impaired",
-            accessBtnActive: "Standard Version",
-            navHome: "Home",
-            navVeterans: "For Veterans",
-            navForms: "Application Forms",
-            navKyiv: "Kyiv City Aid",
-            navDistrict: "Holosiivskyi District",
-            navContacts: "Contacts",
-            heroIntro: "Kyiv City. Useful information, benefits, document templates, and contacts.",
-            sectionTitle: "For Veterans",
-            card1Title: "Application Forms",
-            card1Text: "Applications for financial aid, medical treatment, rehabilitation, and appeals to Holosiivskyi district institutions.",
-            card1Action: "Click to open template & document checklist →",
-            card2Title: "Kyiv Community Support",
-            card2Text: "Financial support and municipal programs for veterans.",
-            card3Title: "Treatment & Rehabilitation",
-            card3Text: "Information about medical facilities, treatment, and rehabilitation centers.",
-            card3Action: "Dental care, rehabilitation & support →",
-            modalRehabTitle: "Treatment, Dental Prosthetics & Rehabilitation",
-            modalRehabDesc: "Full information on free medical care, rehabilitation centers, and prosthetics for veterans:",
-            card4Title: "Veteran Benefits",
-            card4Text: "Social guarantees, compensations, and statutory benefits.",
-            card5Title: "Holosiivskyi District Deputies",
-            card5Text: "Contacts of deputies, reception hours, and submitting appeals.",
-            card6Title: "Legal Aid",
-            card6Text: "Free legal consultations and legal support."
-        }
-    };
-
-    let currentLang = 'uk';
-
-    function setLanguage(lang, btnElement) {
-        currentLang = lang;
-        document.documentElement.lang = lang;
-
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-        if (btnElement) btnElement.classList.add('active');
-
-        const t = translations[lang];
-        document.getElementById('site-title').textContent = t.title;
-        document.getElementById('nav-home').textContent = t.navHome;
-        document.getElementById('nav-veterans').textContent = t.navVeterans;
-        document.getElementById('nav-forms').textContent = t.navForms;
-        document.getElementById('nav-kyiv').textContent = t.navKyiv;
-        document.getElementById('nav-district').textContent = t.navDistrict;
-        document.getElementById('nav-contacts').textContent = t.navContacts;
-        document.getElementById('hero-intro').textContent = t.heroIntro;
-        document.getElementById('section-title').textContent = t.sectionTitle;
-
-        document.getElementById('card1-title').textContent = t.card1Title;
-        document.getElementById('card1-text').textContent = t.card1Text;
-        document.getElementById('card1-action').textContent = t.card1Action;
-
-        document.getElementById('card2-title').textContent = t.card2Title;
-        document.getElementById('card2-text').textContent = t.card2Text;
-        document.getElementById('card3-title').textContent = t.card3Title;
-        document.getElementById('card3-text').textContent = t.card3Text;
-        document.getElementById('card3-action').textContent = t.card3Action;
-        document.getElementById('modal-rehab-title').textContent = t.modalRehabTitle;
-        document.getElementById('modal-rehab-desc').textContent = t.modalRehabDesc;
-
-        document.getElementById('card4-title').textContent = t.card4Title;
-        document.getElementById('card4-text').textContent = t.card4Text;
-        document.getElementById('card5-title').textContent = t.card5Title;
-        document.getElementById('card5-text').textContent = t.card5Text;
-        document.getElementById('card6-title').textContent = t.card6Title;
-        document.getElementById('card6-text').textContent = t.card6Text;
-
-        updateAccessButtonText();
+    function toggleAllDiyaSteps() {
+      const box = document.getElementById("diya-all-steps");
+      const btn = document.getElementById("diya-all-btn");
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        btn.textContent = "Показати всі кроки";
+        return;
+      }
+      box.innerHTML = diyaSteps.map(function (s) {
+        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
+      }).join("");
+      box.style.display = "block";
+      btn.textContent = "Сховати всі кроки";
     }
-
-    function toggleAccessibility() {
-        document.body.classList.toggle('high-contrast');
-        updateAccessButtonText();
-    }
-
-    function updateAccessButtonText() {
-        const btn = document.getElementById('accessibility-btn');
-        const isHighContrast = document.body.classList.contains('high-contrast');
-        btn.textContent = isHighContrast ? translations[currentLang].accessBtnActive : translations[currentLang].accessBtn;
-    }
-
-    // Круглий прозорий значок вкладки без темних кутів зовні
-    window.addEventListener('DOMContentLoaded', () => {
-        const img = new Image();
-        img.src = 'emblem.jpg';
-        img.onload = () => {
-            const size = 128;
-            const canvas = document.createElement('canvas');
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-
-            const radius = size / 2 - 4;
-
-            ctx.beginPath();
-            ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.save();
-            ctx.clip();
-
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, size, size);
-
-            // Вписуємо щит повністю в коло, щоб не було темних кутів
-            const scale = 0.86;
-            const aspect = img.width / img.height || 1;
-            let drawW = size * scale;
-            let drawH = size * scale;
-            if (aspect > 1) {
-                drawH = drawW / aspect;
-            } else {
-                drawW = drawH * aspect;
-            }
-            const offsetX = (size - drawW) / 2;
-            const offsetY = (size - drawH) / 2;
-            ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
-            ctx.restore();
-
-            ctx.beginPath();
-            ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = '#4b5320';
-            ctx.stroke();
-
-            const favicon = document.getElementById('dynamic-favicon');
-            if (favicon) {
-                favicon.href = canvas.toDataURL('image/png');
-            }
-        };
-    });
-</script>
-<section id="diya-guide" class="diya-instruction">
-  <h2>Як завантажити та витягти документ у «Дії»</h2>
-  <p>Покрокова інструкція з 5 кроків.</p>
-
-  <div class="diya-controls">
-    <button type="button" id="diya-prev">Назад</button>
-    <span id="diya-counter">Крок 1 з 5</span>
-    <button type="button" id="diya-next">Далі</button>
-    <button type="button" id="diya-show-all">Показати всі кроки</button>
-  </div>
-
-  <div class="diya-step">
-    <h3>Крок 1</h3>
-    <img src="diya-step1.jpg" alt="Крок 1: скріншот з застосунку Дія">
-  </div>
-
-  <div class="diya-step">
-    <h3>Крок 2</h3>
-    <img src="diya-step2.jpg" alt="Крок 2: скріншот з застосунку Дія">
-  </div>
-
-  <div class="diya-step">
-    <h3>Крок 3</h3>
-    <img src="diya-step3.jpg" alt="Крок 3: скріншот з застосунку Дія">
-  </div>
-
-  <div class="diya-step">
-    <h3>Крок 4</h3>
-    <img src="diya-step4.jpg" alt="Крок 4: скріншот з застосунку Дія">
-  </div>
-
-  <div class="diya-step">
-    <h3>Крок 5</h3>
-    <img src="diya-step5.jpg" alt="Крок 5: скріншот з застосунку Дія">
-  </div>
-</section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var steps = document.querySelectorAll("#diya-guide .diya-step");
-    var prevBtn = document.getElementById("diya-prev");
-    var nextBtn = document.getElementById("diya-next");
-    var showAllBtn = document.getElementById("diya-show-all");
-    var counter = document.getElementById("diya-counter");
-    var currentIndex = 0;
-
-    if (!steps.length || !prevBtn || !nextBtn || !counter) return;
-
-    function renderSingleStep(index) {
-      currentIndex = index;
-      steps.forEach(function (step, i) {
-        step.style.display = i === currentIndex ? "block" : "none";
-      });
-      counter.textContent = "Крок " + (currentIndex + 1) + " з " + steps.length;
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex === steps.length - 1;
-    }
-
-    prevBtn.addEventListener("click", function () {
-      if (currentIndex > 0) renderSingleStep(currentIndex - 1);
-    });
-
-    nextBtn.addEventListener("click", function () {
-      if (currentIndex < steps.length - 1) renderSingleStep(currentIndex + 1);
-    });
-
-    if (showAllBtn) {
-      showAllBtn.addEventListener("click", function () {
-        steps.forEach(function (step) {
-          step.style.display = "block";
-        });
-        counter.textContent = "Усі кроки (" + steps.length + ")";
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-      });
-    }
-
-    renderSingleStep(0);
-  });
-</script>
+  </script>
 </body>
 </html>

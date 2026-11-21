@@ -11,10 +11,10 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #4b5320 0%, #5c7422 14%, #6b8e23 22%, #eef2e8 26%, #ffffff 30%, #ffffff 100%);
+      background: linear-gradient(180deg, #4b5320 0%, #5c7422 14%, #6b8e23 22%, #c9dbcc 26%, #d9e8e3 30%, #e1ece8 100%);
       min-height: 100vh;
       color: #1f2419;
-      line-height: 1.5;
+      line-height: 1.45;
     }
     .container {
       max-width: 1280px;
@@ -74,45 +74,51 @@
       text-decoration: underline;
     }
     main {
-      padding: 18px 0 48px;
+      padding: 16px 0 44px;
     }
     .section-title {
-      margin: 0 0 22px;
+      margin: 0 0 18px;
       font-size: 28px;
       color: #ffffff;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 290px));
+      justify-content: start;
+      gap: 14px;
     }
-    @media (max-width: 900px) {
-      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 960px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 290px));
+      }
     }
-    @media (max-width: 600px) {
-      .cards-grid { grid-template-columns: 1fr; }
+    @media (max-width: 640px) {
+      .cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
     .card {
       background: #ffffff;
       border-top: 3px solid #4b5320;
-      border-radius: 8px;
-      padding: 22px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      border-radius: 7px;
+      padding: 14px 16px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
+      gap: 10px;
+      min-height: 148px;
     }
     .card h3 {
-      margin: 0 0 8px;
-      font-size: 19px;
+      margin: 0 0 6px;
+      font-size: 16px;
       color: #1a1f14;
     }
     .card p {
       margin: 0;
       color: #4a5242;
-      font-size: 14px;
+      font-size: 13px;
     }
     .card-action {
       background: none;
@@ -121,7 +127,7 @@
       text-align: left;
       color: #2e6b1e;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 12.5px;
       cursor: pointer;
     }
     .card-action:hover {

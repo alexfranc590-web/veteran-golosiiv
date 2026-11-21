@@ -22,6 +22,39 @@
       padding: 0 16px;
       position: relative;
     }
+    .corner-badge-wrap {
+      position: absolute;
+      top: 6px;
+      right: 16px;
+      width: 148px;
+      height: 156px;
+      z-index: 5;
+      perspective: 750px;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .corner-badge-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: rotateY(-8deg) rotateX(4deg);
+      transition: transform 0.35s ease, filter 0.35s ease;
+      -webkit-mask-image: radial-gradient(ellipse 76% 76% at 50% 50%, #000000 62%, rgba(0, 0, 0, 0.65) 82%, transparent 100%);
+      mask-image: radial-gradient(ellipse 76% 76% at 50% 50%, #000000 62%, rgba(0, 0, 0, 0.65) 82%, transparent 100%);
+      filter:
+        drop-shadow(0 6px 8px rgba(18, 22, 10, 0.55))
+        drop-shadow(3px 10px 14px rgba(0, 0, 0, 0.38))
+        drop-shadow(0 0 8px rgba(255, 245, 195, 0.16));
+    }
+    .corner-badge-wrap:hover .corner-badge-img {
+      transform: rotateY(-2deg) rotateX(1deg) scale(1.03);
+      filter:
+        drop-shadow(0 8px 11px rgba(18, 22, 10, 0.62))
+        drop-shadow(4px 12px 18px rgba(0, 0, 0, 0.44))
+        drop-shadow(0 0 12px rgba(255, 245, 195, 0.24));
+    }
     main {
       padding: 16px 0 44px;
     }
@@ -74,6 +107,10 @@
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto;
+      }
+      .corner-badge-wrap {
+        position: static;
+        margin: 0 auto 8px;
       }
     }
     .card {
@@ -237,6 +274,10 @@
 <body>
   <main id="veteranam">
     <div class="container">
+      <div class="corner-badge-wrap">
+        <img src="medal.png" alt="Медаль Ветеран війни" class="corner-badge-img">
+      </div>
+
       <div class="hero-heading-row">
         <a href="#veteranam" class="brand" aria-label="Ветеран Голосіївського району">
           <img src="favicon.png" alt="Герб порталу" class="brand-icon">

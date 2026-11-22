@@ -15,22 +15,26 @@
       min-height: 100vh;
       color: #1f2419;
       line-height: 1.45;
+      display: flex;
+      flex-direction: column;
     }
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 16px;
       position: relative;
+      width: 100%;
     }
     main {
       padding: 16px 0 44px;
+      flex: 1;
     }
     .hero-heading-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin: 12px 0 58px;
+      margin: 12px 0 20px;
       flex-wrap: wrap;
     }
     .brand {
@@ -56,6 +60,60 @@
       font-weight: 700;
       color: #ffffff;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .nav-tabs {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 32px;
+      flex-wrap: wrap;
+    }
+    .nav-tab-btn {
+      background: #262925;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-tab-btn:hover {
+      background: #333731;
+    }
+    .nav-tab-btn.active {
+      background: #1a1c19;
+      border-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    }
+    .hamburger-lines {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 20px;
+      height: 15px;
+    }
+    .hamburger-lines span {
+      display: block;
+      width: 100%;
+      height: 2.5px;
+      background: #ffffff;
+      border-radius: 1px;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    .home-placeholder {
+      min-height: 340px;
     }
     .cards-grid {
       display: grid;
@@ -238,161 +296,37 @@
   <main id="veteranam">
     <div class="container">
       <div class="hero-heading-row">
-        <a href="#veteranam" class="brand" aria-label="Ветеран Голосіївського району">
+        <a href="#home" class="brand" aria-label="Ветеран Голосіївського району" onclick="switchTab('home'); return false;">
           <img src="favicon.png" alt="Герб порталу" class="brand-icon">
         </a>
         <h1 class="center-banner-title">Ветерани Голосіївського району</h1>
       </div>
 
-      <div class="cards-grid">
-        <div class="card">
-          <div>
-            <h3>Зразки заяв</h3>
-            <p>Заяви на матеріальну допомогу, лікування, реабілітацію та звернення до установ Голосіївського району.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Натисніть, щоб відкрити зразок та перелік документів →</button>
-        </div>
+      <nav class="nav-tabs" aria-label="Розділи порталу">
+        <button type="button" id="tab-btn-home" class="nav-tab-btn active" aria-label="Головна" onclick="switchTab('home')">
+          <span class="hamburger-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+        <button type="button" id="tab-btn-services" class="nav-tab-btn" onclick="switchTab('services')">Сервіси</button>
+      </nav>
 
-        <div class="card">
-          <div>
-            <h3>Допомога громади Києва</h3>
-            <p>Матеріальна підтримка та міські програми для ветеранів.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Детальніше про програми підтримки →</button>
-        </div>
-
-        <div class="card">
-          <div>
-            <h3>Лікування та реабілітація</h3>
-            <p>Інформація про медичні заклади, лікування та реабілітаційні центри.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Лікування зубів, реабілітація та супровід →</button>
-        </div>
-
-        <div class="card diya-card-slot">
-          <div>
-            <h3>Як завантажити та витягти документ у «Дії»</h3>
-            <p>Покрокова візуальна інструкція щодо отримання та завантаження документа або витягу в застосунку «Дія».</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити покрокову інструкцію →</button>
-        </div>
-
-        <div class="card">
-          <div>
-            <h3>Пільги ветеранам</h3>
-            <p>Соціальні гарантії, компенсації та передбачені законом пільги.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Переглянути перелік пільг →</button>
-        </div>
-
-        <div class="card">
-          <div>
-            <h3>Депутати Голосіївського району</h3>
-            <p>Контакти депутатів, графік прийому та подання звернень.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Графік та звернення →</button>
-        </div>
-
-        <div class="card">
-          <div>
-            <h3>Юридична допомога</h3>
-            <p>Безоплатні юридичні консультації та правова підтримка.</p>
-          </div>
-          <button type="button" class="card-action" onclick="openDiyaGuide()">Отримати консультацію →</button>
-        </div>
-      </div>
-
-      <section id="diya-guide" aria-label="Як завантажити та витягти документ у Дії">
-        <div class="diya-header">
-          <h2 id="diya-step-title">Крок 1 з 5</h2>
-          <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
-        </div>
-        <p id="diya-step-desc"></p>
-        <div class="diya-step">
-          <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
-        </div>
-        <div class="diya-controls">
-          <button type="button" id="diya-prev" onclick="changeDiyaStep(-1)">Назад</button>
-          <span id="diya-counter">1 / 5</span>
-          <button type="button" id="diya-next" onclick="changeDiyaStep(1)">Далі</button>
-          <button type="button" id="diya-all-btn" onclick="toggleAllDiyaSteps()">Показати всі кроки</button>
-        </div>
-        <div id="diya-all-steps"></div>
+      <!-- Вкладка: Головна (поки чиста для подальшого наповнення) -->
+      <section id="tab-home" class="tab-panel active" aria-label="Головна сторінка">
+        <div class="home-placeholder"></div>
       </section>
-    </div>
-  </main>
 
-  <footer id="contacts" class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong>Ветеран Голосіївського району</strong>
-        <div>03127, м. Київ, просп. Голосіївський, 42</div>
-        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
-      </div>
-      <div>
-        <strong>Контакти</strong>
-        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
-      </div>
-    </div>
-  </footer>
+      <!-- Вкладка: Сервіси (усі картки та покрокова інструкція) -->
+      <section id="tab-services" class="tab-panel" aria-label="Сервіси для ветеранів">
+        <div class="cards-grid">
+          <div class="card">
+            <div>
+              <h3>Зразки заяв</h3>
+              <p>Заяви на матеріальну допомогу, лікування, реабілітацію та звернення до установ Голосіївського району.</p>
+            </div>
+            <button type="button" class="card-action" onclick="openDiyaGuide()">Натисніть, щоб відкрити зразок та перелік документів →</button>
+          </div>
 
-  <script>
-    const diyaSteps = [
-      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу потрібних послуг або документів." },
-      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "Оберіть відповідний пункт меню для роботи з документами чи довідками." },
-      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Перейдіть у потрібний підрозділ та оберіть формування необхідного витягу чи документа." },
-      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "Підтвердьте запит у застосунку та дочекайтеся формування документа." },
-      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Завантажте або збережіть сформований документ на пристрій." }
-    ];
-
-    let currentDiyaIndex = 0;
-
-    function renderDiyaStep() {
-      const step = diyaSteps[currentDiyaIndex];
-      document.getElementById("diya-step-title").textContent = step.title;
-      document.getElementById("diya-step-desc").textContent = step.desc;
-      document.getElementById("diya-step-img").src = step.img;
-      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
-      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
-      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
-      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
-    }
-
-    function openDiyaGuide() {
-      const guide = document.getElementById("diya-guide");
-      guide.style.display = "block";
-      renderDiyaStep();
-      guide.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function closeDiyaGuide() {
-      document.getElementById("diya-guide").style.display = "none";
-      document.getElementById("diya-all-steps").style.display = "none";
-      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
-    }
-
-    function changeDiyaStep(delta) {
-      const nextIndex = currentDiyaIndex + delta;
-      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
-        currentDiyaIndex = nextIndex;
-        renderDiyaStep();
-      }
-    }
-
-    function toggleAllDiyaSteps() {
-      const box = document.getElementById("diya-all-steps");
-      const btn = document.getElementById("diya-all-btn");
-      if (box.style.display === "block") {
-        box.style.display = "none";
-        btn.textContent = "Показати всі кроки";
-        return;
-      }
-      box.innerHTML = diyaSteps.map(function (s) {
-        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
-      }).join("");
-      box.style.display = "block";
-      btn.textContent = "Сховати всі кроки";
-    }
-  </script>
-</body>
-</html>
+          <div class="card">

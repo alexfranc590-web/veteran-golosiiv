@@ -31,38 +31,39 @@
     }
     .top-left-nav {
       position: absolute;
-      top: 12px;
+      top: 10px;
       left: 16px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
       z-index: 10;
     }
     .nav-tab-btn {
-      background: transparent;
+      background: #262925;
       color: #ffffff;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      padding: 6px 4px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 6px;
+      padding: 8px 14px;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      min-height: 32px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-      transition: opacity 0.2s ease;
+      gap: 7px;
+      min-height: 36px;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
     .nav-tab-btn:hover {
-      opacity: 0.85;
+      background: #343832;
     }
     .nav-tab-btn.active {
-      opacity: 1;
-      text-decoration: underline;
-      text-underline-offset: 5px;
+      background: #181a17;
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
     .hamburger-lines {
       display: inline-flex;
@@ -439,3 +440,74 @@
       btnServices.setAttribute("aria-expanded", "false");
       btnHome.classList.add("active");
     }
+
+    function openServices() {
+      const dropdown = document.getElementById("services-dropdown");
+      const btnHome = document.getElementById("btn-home");
+      const btnServices = document.getElementById("btn-services");
+      dropdown.classList.add("open");
+      btnServices.classList.add("open", "active");
+      btnServices.setAttribute("aria-expanded", "true");
+      btnHome.classList.remove("active");
+    }
+
+    const diyaSteps = [
+      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу потрібних послуг або документів." },
+      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "Оберіть відповідний пункт меню для роботи з документами чи довідками." },
+      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Перейдіть у потрібний підрозділ та оберіть формування необхідного витягу чи документа." },
+      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "Підтвердьте запит у застосунку та дочекайтеся формування документа." },
+      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Завантажте або збережіть сформований документ на пристрій." }
+    ];
+
+    let currentDiyaIndex = 0;
+
+    function renderDiyaStep() {
+      const step = diyaSteps[currentDiyaIndex];
+      document.getElementById("diya-step-title").textContent = step.title;
+      document.getElementById("diya-step-desc").textContent = step.desc;
+      document.getElementById("diya-step-img").src = step.img;
+      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
+      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
+    }
+
+    function openDiyaGuide() {
+      openServices();
+      const guide = document.getElementById("diya-guide");
+      guide.style.display = "block";
+      renderDiyaStep();
+      guide.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function closeDiyaGuide() {
+      document.getElementById("diya-guide").style.display = "none";
+      document.getElementById("diya-all-steps").style.display = "none";
+      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
+    }
+
+    function changeDiyaStep(delta) {
+      const nextIndex = currentDiyaIndex + delta;
+      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
+        currentDiyaIndex = nextIndex;
+        renderDiyaStep();
+      }
+    }
+
+    function toggleAllDiyaSteps() {
+      const box = document.getElementById("diya-all-steps");
+      const btn = document.getElementById("diya-all-btn");
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        btn.textContent = "Показати всі кроки";
+        return;
+      }
+      box.innerHTML = diyaSteps.map(function (s) {
+        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
+      }).join("");
+      box.style.display = "block";
+      btn.textContent = "Сховати всі кроки";
+    }
+  </script>
+</body>
+</html>

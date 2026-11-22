@@ -197,7 +197,8 @@
       font-size: 12px;
       line-height: 1.25;
     }
-    .card-has-corner-icon p {
+    .card-has-corner-icon p,
+    .card-has-corner-icon .card-action {
       padding-right: 34px;
     }
     .card-corner-icon {
@@ -364,12 +365,13 @@
 
       <section id="services-dropdown" class="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
-          <div class="card">
+          <div class="card card-has-corner-icon">
             <div>
               <h3>Зразки заяв</h3>
               <p>Заяви на допомогу, лікування, реабілітацію та звернення до установ району.</p>
             </div>
             <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити зразок та документи →</button>
+            <img src="forms-icon.png" alt="Зразки заяв" class="card-corner-icon">
           </div>
 
           <div class="card card-has-corner-icon">

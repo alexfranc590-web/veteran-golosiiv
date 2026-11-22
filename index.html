@@ -158,6 +158,7 @@
       }
     }
     .card {
+      position: relative;
       background: linear-gradient(90deg, #dce4ef 0%, #e7ecf2 55%, #f0f3f6 100%);
       border-top: 3px solid #4b5320;
       border-radius: 7px;
@@ -197,6 +198,20 @@
       color: #4a5242;
       font-size: 12px;
       line-height: 1.25;
+    }
+    .card-has-corner-icon p {
+      padding-right: 34px;
+    }
+    .card-corner-icon {
+      position: absolute;
+      right: 9px;
+      bottom: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+      pointer-events: none;
     }
     .card-action {
       background: none;
@@ -366,11 +381,12 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-has-corner-icon">
             <div>
               <h3>Лікування та реабілітація</h3>
               <p>Інформація про медичні заклади, лікування та реабілітаційні центри.</p>
             </div>
+            <img src="med-icon.png" alt="Лікування та реабілітація" class="card-corner-icon">
           </div>
 
           <div class="card diya-card-slot">

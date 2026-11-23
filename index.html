@@ -80,7 +80,7 @@
     }
     .services-arrow {
       font-size: 11px;
-      transition: transform 0.28s ease;
+      transition: transform 0.2s ease;
     }
     .nav-tab-btn.open .services-arrow {
       transform: rotate(180deg);
@@ -125,16 +125,9 @@
     }
     .services-dropdown {
       display: none;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.28s ease, transform 0.28s ease;
-    }
-    .services-dropdown.visible {
-      display: block;
     }
     .services-dropdown.open {
-      opacity: 1;
-      transform: translateY(0);
+      display: block;
     }
     .cards-grid {
       display: grid;
@@ -350,7 +343,7 @@
             <span></span>
           </span>
         </button>
-        <button type="button" id="btn-services" class="nav-tab-btn" aria-expanded="false" onclick="openServices()">
+        <button type="button" id="btn-services" class="nav-tab-btn" aria-expanded="false" onclick="toggleServices()">
           <span>Сервіси</span>
           <span class="services-arrow" aria-hidden="true">▾</span>
         </button>
@@ -420,47 +413,4 @@
               <h3>Юридична допомога</h3>
               <p>Безоплатні юридичні консультації та правова підтримка.</p>
             </div>
-            <img src="law-icon.png" alt="Юридична допомога" class="card-corner-icon">
-          </div>
-        </div>
-
-        <div id="diya-guide" aria-label="Як завантажити та витягти документ у Дії">
-          <div class="diya-header">
-            <h2 id="diya-step-title">Крок 1 з 5</h2>
-            <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
-          </div>
-          <p id="diya-step-desc"></p>
-          <div class="diya-step">
-            <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
-          </div>
-          <div class="diya-controls">
-            <button type="button" id="diya-prev" onclick="changeDiyaStep(-1)">Назад</button>
-            <span id="diya-counter">1 / 5</span>
-            <button type="button" id="diya-next" onclick="changeDiyaStep(1)">Далі</button>
-            <button type="button" id="diya-all-btn" onclick="toggleAllDiyaSteps()">Показати всі кроки</button>
-          </div>
-          <div id="diya-all-steps"></div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer id="contacts" class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong>Ветеран Голосіївського району</strong>
-        <div>03127, м. Київ, просп. Голосіївський, 42</div>
-        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
-      </div>
-      <div>
-        <strong>Контакти</strong>
-        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    let hideDropdownTimer = null;
-
-    function showHome() {
-      const
+            <img src="law-icon.png"

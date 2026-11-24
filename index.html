@@ -215,7 +215,6 @@
       text-decoration: underline;
       color: #4b5320;
     }
-    /* Випадаючі маленькі вікна документів Дія */
     #diya-subwindows {
       display: none;
       max-width: 780px;
@@ -479,8 +478,7 @@
           </div>
         </div>
 
-        <!-- Маленькі випадаючі вікна документів у «Дії» -->
-        <div id="diya-subwindows" aria-label="Документи та інструкції в Дії">
+        <div id="diya-subwindows" aria-label="Документи та витяги в Дії">
           <div class="diya-subwindows-header">
             <h2 class="diya-subwindows-title">Документи та витяги в «Дії»</h2>
             <button type="button" class="diya-close" onclick="closeDiyaSubwindows()">Згорнути</button>
@@ -562,7 +560,6 @@
       showHome();
     });
 
-    /* Каталог документів у «Дії»: додавайте нові об'єкти сюди, коли з'являться нові скріншоти */
     const diyaDocuments = [
       {
         id: "residence-extract",
@@ -574,6 +571,16 @@
           { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
           { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
           { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
+        ]
+      },
+      {
+        id: "ok5-certificate",
+        title: "Довідка ОК-5",
+        subtitle: "Інструкція отримання у застосунку «Дія»",
+        steps: [
+          { img: "ok5-step1.jpg", title: "Крок 1", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
+          { img: "ok5-step2.jpg", title: "Крок 2", desc: "Оберіть розділ «Довідки та витяги» і натисніть «Довідка ОК-5»." },
+          { img: "ok5-step3.jpg", title: "Крок 3", desc: "Натисніть «Замовити довідку» та завантажте готовий документ." }
         ]
       }
     ];

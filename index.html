@@ -152,6 +152,12 @@
       height: 112px;
       overflow: hidden;
     }
+    .card.clickable-card {
+      cursor: pointer;
+    }
+    .card.clickable-card:hover {
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+    }
     @media (max-width: 1160px) {
       .card {
         height: 112px;
@@ -209,10 +215,71 @@
       text-decoration: underline;
       color: #4b5320;
     }
+    /* Випадаючі маленькі вікна документів Дія */
+    #diya-subwindows {
+      display: none;
+      max-width: 780px;
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid #4b5320;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+    }
+    .diya-subwindows-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .diya-subwindows-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2c3514;
+    }
+    .diya-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .diya-mini-window {
+      background: linear-gradient(135deg, #f3f6f9, #e4ebf2);
+      border: 1px solid #8fa064;
+      border-left: 4px solid #4b5320;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .diya-mini-window:hover {
+      transform: translateY(-1px);
+      background: #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
+    .diya-mini-window.active-doc {
+      background: #eef5e3;
+      border-color: #2e6b1e;
+      box-shadow: 0 0 0 2px rgba(46, 107, 30, 0.22);
+    }
+    .diya-mini-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1f14;
+    }
+    .diya-mini-sub {
+      font-size: 11.5px;
+      color: #4a5242;
+    }
     #diya-guide {
       display: none;
       max-width: 430px;
-      margin: 28px auto 0;
+      margin: 20px auto 0;
       padding: 16px 18px;
       background: #ffffff;
       border: 2px solid #4b5320;
@@ -225,12 +292,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .diya-header h2 {
       margin: 0;
       color: #4b5320;
       font-size: 17px;
+    }
+    #diya-doc-name {
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #2e6b1e;
     }
     .diya-close {
       background: #ecefe8;
@@ -352,7 +425,7 @@
               <h3>Зразки заяв</h3>
               <p>Заяви на допомогу, лікування, реабілітацію та звернення до установ району.</p>
             </div>
-            <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити зразок та документи →</button>
+            <button type="button" class="card-action" onclick="toggleDiyaSubwindows()">Відкрити зразок та документи →</button>
             <img src="forms-icon.png" alt="Зразки заяв" class="card-corner-icon">
           </div>
 
@@ -372,12 +445,12 @@
             <img src="med-icon.png" alt="Лікування та реабілітація" class="card-corner-icon">
           </div>
 
-          <div class="card diya-card-slot card-has-corner-icon">
+          <div class="card diya-card-slot card-has-corner-icon clickable-card" onclick="toggleDiyaSubwindows()">
             <div>
               <h3>Як завантажити документ у «Дії»</h3>
-              <p>Покрокова інструкція отримання витягу чи документа в застосунку «Дія».</p>
+              <p>Оберіть потрібний документ у випадаючому списку для перегляду інструкції.</p>
             </div>
-            <button type="button" class="card-action" onclick="openDiyaGuide()">Відкрити інструкцію →</button>
+            <button type="button" class="card-action" onclick="event.stopPropagation(); toggleDiyaSubwindows()">Обрати документ →</button>
             <img src="diya-icon.png" alt="Як завантажити документ у «Дії»" class="card-corner-icon">
           </div>
 
@@ -406,11 +479,21 @@
           </div>
         </div>
 
-        <div id="diya-guide" aria-label="Як завантажити та витягти документ у Дії">
+        <!-- Маленькі випадаючі вікна документів у «Дії» -->
+        <div id="diya-subwindows" aria-label="Документи та інструкції в Дії">
+          <div class="diya-subwindows-header">
+            <h2 class="diya-subwindows-title">Документи та витяги в «Дії»</h2>
+            <button type="button" class="diya-close" onclick="closeDiyaSubwindows()">Згорнути</button>
+          </div>
+          <div id="diya-mini-grid" class="diya-mini-grid"></div>
+        </div>
+
+        <div id="diya-guide" aria-label="Покрокова інструкція у застосунку Дія">
           <div class="diya-header">
             <h2 id="diya-step-title">Крок 1 з 5</h2>
             <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
           </div>
+          <div id="diya-doc-name"></div>
           <p id="diya-step-desc"></p>
           <div class="diya-step">
             <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
@@ -479,50 +562,107 @@
       showHome();
     });
 
-    const diyaSteps = [
-      { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
-      { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "У меню «Сервіси» оберіть розділ «Місце проживання»." },
-      { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
-      { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
-      { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
+    /* Каталог документів у «Дії»: додавайте нові об'єкти сюди, коли з'являться нові скріншоти */
+    const diyaDocuments = [
+      {
+        id: "residence-extract",
+        title: "Витяг про місце проживання",
+        subtitle: "Інструкція у застосунку «Дія» (5 кроків)",
+        steps: [
+          { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
+          { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "У меню «Сервіси» оберіть розділ «Місце проживання»." },
+          { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
+          { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
+          { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
+        ]
+      }
     ];
 
+    let activeDocIndex = 0;
     let currentDiyaIndex = 0;
 
+    function renderDiyaMiniWindows() {
+      const grid = document.getElementById("diya-mini-grid");
+      grid.innerHTML = diyaDocuments.map(function (doc, idx) {
+        const isSelected = idx === activeDocIndex && document.getElementById("diya-guide").style.display === "block";
+        return (
+          '<button type="button" class="diya-mini-window' + (isSelected ? " active-doc" : "") + '" onclick="selectDiyaDocument(' + idx + ')">' +
+            '<span class="diya-mini-title">' + doc.title + '</span>' +
+            '<span class="diya-mini-sub">' + doc.subtitle + '</span>' +
+          '</button>'
+        );
+      }).join("");
+    }
+
+    function toggleDiyaSubwindows() {
+      openServices();
+      const box = document.getElementById("diya-subwindows");
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        closeDiyaGuide();
+        return;
+      }
+      renderDiyaMiniWindows();
+      box.style.display = "block";
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeDiyaSubwindows() {
+      document.getElementById("diya-subwindows").style.display = "none";
+      closeDiyaGuide();
+    }
+
+    function selectDiyaDocument(docIdx) {
+      activeDocIndex = docIdx;
+      currentDiyaIndex = 0;
+      document.getElementById("diya-all-steps").style.display = "none";
+      document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
+      const guide = document.getElementById("diya-guide");
+      guide.style.display = "block";
+      renderDiyaMiniWindows();
+      renderDiyaStep();
+      guide.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     function renderDiyaStep() {
-      const step = diyaSteps[currentDiyaIndex];
+      const doc = diyaDocuments[activeDocIndex];
+      const step = doc.steps[currentDiyaIndex];
+      const total = doc.steps.length;
+      document.getElementById("diya-doc-name").textContent = doc.title;
       document.getElementById("diya-step-title").textContent = step.title;
       document.getElementById("diya-step-desc").textContent = step.desc;
-      document.getElementById("diya-step-img").src = step.img;
-      document.getElementById("diya-step-img").alt = step.title + " — інструкція Дія";
-      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + diyaSteps.length;
+      const imgEl = document.getElementById("diya-step-img");
+      imgEl.src = step.img;
+      imgEl.alt = doc.title + " — " + step.title;
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + total;
       document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
-      document.getElementById("diya-next").disabled = currentDiyaIndex === diyaSteps.length - 1;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === total - 1;
     }
 
     function openDiyaGuide() {
       openServices();
-      const guide = document.getElementById("diya-guide");
-      guide.style.display = "block";
-      renderDiyaStep();
-      guide.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("diya-subwindows").style.display = "block";
+      selectDiyaDocument(activeDocIndex);
     }
 
     function closeDiyaGuide() {
       document.getElementById("diya-guide").style.display = "none";
       document.getElementById("diya-all-steps").style.display = "none";
       document.getElementById("diya-all-btn").textContent = "Показати всі кроки";
+      renderDiyaMiniWindows();
     }
 
     function changeDiyaStep(delta) {
+      const total = diyaDocuments[activeDocIndex].steps.length;
       const nextIndex = currentDiyaIndex + delta;
-      if (nextIndex >= 0 && nextIndex < diyaSteps.length) {
+      if (nextIndex >= 0 && nextIndex < total) {
         currentDiyaIndex = nextIndex;
         renderDiyaStep();
       }
     }
 
     function toggleAllDiyaSteps() {
+      const doc = diyaDocuments[activeDocIndex];
       const box = document.getElementById("diya-all-steps");
       const btn = document.getElementById("diya-all-btn");
       if (box.style.display === "block") {
@@ -530,7 +670,7 @@
         btn.textContent = "Показати всі кроки";
         return;
       }
-      box.innerHTML = diyaSteps.map(function (s) {
+      box.innerHTML = doc.steps.map(function (s) {
         return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
       }).join("");
       box.style.display = "block";

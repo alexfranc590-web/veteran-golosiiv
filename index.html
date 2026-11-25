@@ -241,12 +241,61 @@
     }
     .forms-list {
       margin: 0;
-      padding-left: 18px;
+      padding: 0;
+      list-style: none;
       color: #2c3514;
       font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .forms-list li {
-      margin-bottom: 6px;
+    .forms-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #f3f6f9, #e7edf3);
+      border: 1px solid #c3ceb0;
+      border-left: 4px solid #4b5320;
+      border-radius: 7px;
+    }
+    .forms-item-title {
+      font-weight: 700;
+      color: #1a1f14;
+    }
+    .forms-item-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pdf-link-btn {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(135deg, #4b5320, #6b8e23);
+      color: #ffffff;
+    }
+    .pdf-link-btn:hover {
+      filter: brightness(1.08);
+    }
+    .pdf-link-btn.secondary {
+      background: #ffffff;
+      color: #2c3514;
+      border: 1px solid #8fa064;
+    }
+    .pdf-link-btn.secondary:hover {
+      background: #eef5e3;
+      filter: none;
+    }
+    .forms-item-soon {
+      font-size: 12px;
+      color: #6b7360;
+      font-style: italic;
     }
     .diya-mini-grid {
       display: grid;
@@ -494,9 +543,21 @@
             <button type="button" class="diya-close" onclick="closeFormsPanel()">Згорнути</button>
           </div>
           <ul class="forms-list">
-            <li>Заява на матеріальну допомогу</li>
-            <li>Заява на лікування та реабілітацію</li>
-            <li>Звернення до установ Голосіївського району</li>
+            <li class="forms-item">
+              <span class="forms-item-title">Заява на матеріальну допомогу (PDF)</span>
+              <div class="forms-item-actions">
+                <a href="zayava-materialna-dopomoga.pdf" target="_blank" rel="noopener" class="pdf-link-btn">Відкрити PDF</a>
+                <a href="zayava-materialna-dopomoga.pdf" download="Заява_на_матеріальну_допомогу.pdf" class="pdf-link-btn secondary">Завантажити</a>
+              </div>
+            </li>
+            <li class="forms-item">
+              <span class="forms-item-title">Заява на лікування та реабілітацію</span>
+              <span class="forms-item-soon">зразок готується</span>
+            </li>
+            <li class="forms-item">
+              <span class="forms-item-title">Звернення до установ Голосіївського району</span>
+              <span class="forms-item-soon">зразок готується</span>
+            </li>
           </ul>
         </div>
 

@@ -1,0 +1,91 @@
+name: Update MVA News
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch and update news.json
+        run: |
+          node -e '
+          const fs = require("fs");
+          const path = "news.json";
+          const URL = "https://mva.gov.ua/category/86-novini";
+
+          async function run() {
+            try {
+              const res = await fetch(URL, {
+                headers: {
+                  "User-Agent": "Mozilla/5.0 (compatible; VeteranGolosiivBot/1.0)"
+                }
+              });
+              if (!res.ok) throw new Error("HTTP " + res.status);
+              const html = await res.text();
+
+              const linkRegex = /<a[^>]+href="([^"]*\/news\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+              const seen = new Set();
+              const items = [];
+              let match;
+
+              while ((match = linkRegex.exec(html)) !== null && items.length < 6) {
+                let href = match[1].trim();
+                if (href.startsWith("/")) href = "https://mva.gov.ua" + href;
+                if (!href.startsWith("https://mva.gov.ua/")) continue;
+                if (seen.has(href)) continue;
+
+                const cleanTitle = match[2]
+                  .replace(/<[^>]+>/g, " ")
+                  .replace(/\s+/g, " ")
+                  .trim();
+
+                if (cleanTitle.length < 15) continue;
+                seen.add(href);
+
+                items.push({
+                  date: "Мінветеранів • mva.gov.ua",
+                  title: cleanTitle.slice(0, 140),
+                  text: "Офіційна публікація Міністерства у справах ветеранів України. Натисніть, щоб відкрити повний текст новини.",
+                  url: href,
+                  image: ""
+                });
+              }
+
+              if (items.length > 0) {
+                fs.writeFileSync(path, JSON.stringify(items, null, 2) + "\n", "utf8");
+                console.log("Updated news.json with", items.length, "items");
+              } else {
+                console.log("No items parsed; keeping existing news.json");
+              }
+            } catch (err) {
+              console.log("Fetch warning:", err.message, "- keeping existing news.json");
+            }
+          }
+          run();
+          '
+
+      - name: Commit changes if news.json changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news.json
+          if git diff --staged --quiet; then
+            echo "No changes in news.json"
+          else
+            git commit -m "chore: update MVA news"
+            git push
+          fi

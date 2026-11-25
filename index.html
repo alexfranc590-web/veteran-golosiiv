@@ -215,6 +215,7 @@
       text-decoration: underline;
       color: #4b5320;
     }
+    #forms-panel,
     #diya-subwindows {
       display: none;
       max-width: 780px;
@@ -237,6 +238,15 @@
       font-size: 15px;
       font-weight: 700;
       color: #2c3514;
+    }
+    .forms-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #2c3514;
+      font-size: 14px;
+    }
+    .forms-list li {
+      margin-bottom: 6px;
     }
     .diya-mini-grid {
       display: grid;
@@ -419,12 +429,12 @@
 
       <section id="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
-          <div class="card card-has-corner-icon">
+          <div class="card card-has-corner-icon clickable-card" onclick="toggleFormsPanel()">
             <div>
               <h3>Зразки заяв</h3>
               <p>Заяви на допомогу, лікування, реабілітацію та звернення до установ району.</p>
             </div>
-            <button type="button" class="card-action" onclick="toggleDiyaSubwindows()">Відкрити зразок та документи →</button>
+            <button type="button" class="card-action" onclick="event.stopPropagation(); toggleFormsPanel()">Переглянути перелік заяв →</button>
             <img src="forms-icon.png" alt="Зразки заяв" class="card-corner-icon">
           </div>
 
@@ -476,6 +486,18 @@
             </div>
             <img src="law-icon.png" alt="Юридична допомога" class="card-corner-icon">
           </div>
+        </div>
+
+        <div id="forms-panel" aria-label="Зразки заяв">
+          <div class="diya-subwindows-header">
+            <h2 class="diya-subwindows-title">Зразки заяв</h2>
+            <button type="button" class="diya-close" onclick="closeFormsPanel()">Згорнути</button>
+          </div>
+          <ul class="forms-list">
+            <li>Заява на матеріальну допомогу</li>
+            <li>Заява на лікування та реабілітацію</li>
+            <li>Звернення до установ Голосіївського району</li>
+          </ul>
         </div>
 
         <div id="diya-subwindows" aria-label="Документи та витяги в Дії">
@@ -560,6 +582,23 @@
       showHome();
     });
 
+    function toggleFormsPanel() {
+      openServices();
+      document.getElementById("diya-subwindows").style.display = "none";
+      closeDiyaGuide();
+      const panel = document.getElementById("forms-panel");
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+        return;
+      }
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeFormsPanel() {
+      document.getElementById("forms-panel").style.display = "none";
+    }
+
     const diyaDocuments = [
       {
         id: "residence-extract",
@@ -614,6 +653,7 @@
 
     function toggleDiyaSubwindows() {
       openServices();
+      closeFormsPanel();
       const box = document.getElementById("diya-subwindows");
       if (box.style.display === "block") {
         box.style.display = "none";
@@ -659,6 +699,7 @@
 
     function openDiyaGuide() {
       openServices();
+      closeFormsPanel();
       document.getElementById("diya-subwindows").style.display = "block";
       selectDiyaDocument(activeDocIndex);
     }

@@ -239,7 +239,7 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 265px));
-      grid-template-rows: repeat(2, 112px);
+      grid-template-rows: repeat(2, minmax(118px, auto));
       justify-content: start;
       gap: 12px;
       padding-top: 4px;
@@ -268,8 +268,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 5px;
-      min-height: 112px;
+      gap: 6px;
+      min-height: 118px;
       overflow: hidden;
     }
     .card.clickable-card {
@@ -314,6 +314,25 @@
       object-fit: cover;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
       pointer-events: none;
+    }
+    .kp-banner-box {
+      margin-top: 6px;
+      background: #1b4b9c;
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+    }
+    .kp-banner-img {
+      display: block;
+      max-width: 100%;
+      max-height: 44px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 3px;
     }
     .card-action {
       background: none;
@@ -693,13 +712,15 @@
             <img src="law-icon.png" alt="Юридична допомога" class="card-corner-icon">
           </div>
 
-          <div id="kp-service-card" class="card card-has-corner-icon clickable-card" onclick="openKpPortal()">
+          <div id="kp-service-card" class="card clickable-card" onclick="openKpPortal()">
             <div>
               <h3 id="kp-card-title">Комунальні підприємства району</h3>
               <p id="kp-card-text">Офіційний довідник КП Голосіївського району на порталі Голосіївської РДА.</p>
             </div>
+            <div class="kp-banner-box">
+              <img src="golos-logo.png" alt="Голосіївська РДА" class="kp-banner-img">
+            </div>
             <a id="kp-card-link" href="https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu" target="_blank" rel="noopener" class="card-action" onclick="event.stopPropagation()">Відкрити довідник →</a>
-            <img src="golos-logo.png" alt="Голосіївська РДА" class="card-corner-icon">
           </div>
         </div>
 

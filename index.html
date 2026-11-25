@@ -1019,31 +1019,1047 @@
       if (allBtn) allBtn.textContent = "Показати всі кроки";
       renderDiyaMiniWindows();
     }
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ветеран Голосіївського району</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #4b5320 0%, #5c7422 14%, #6b8e23 22%, #c9dbcc 26%, #d9e8e3 30%, #e1ece8 100%);
+      min-height: 100vh;
+      color: #1f2419;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+      position: relative;
+      width: 100%;
+    }
+    main {
+      padding: 16px 0 40px;
+      flex: 1;
+    }
+    .top-left-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-bottom: 6px;
+      z-index: 999;
+      pointer-events: auto;
+    }
+    @media (min-width: 761px) {
+      .top-left-nav {
+        position: absolute;
+        top: 10px;
+        left: 16px;
+        margin-bottom: 0;
+      }
+    }
+    .nav-tab-btn {
+      position: relative;
+      z-index: 1000;
+      pointer-events: auto;
+      background: #262925;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 7px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+      user-select: none;
+    }
+    .nav-tab-btn:hover {
+      background: #343832;
+    }
+    .nav-tab-btn.active {
+      background: #181a17;
+      border-color: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+    .hamburger-lines {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 19px;
+      height: 14px;
+      pointer-events: none;
+    }
+    .hamburger-lines span {
+      display: block;
+      width: 100%;
+      height: 2.5px;
+      background: #ffffff;
+      border-radius: 1px;
+    }
+    .hero-heading-row {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 12px 0 36px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      background: linear-gradient(180deg, rgba(168, 204, 232, 0.72) 0%, rgba(168, 204, 232, 0.72) 50%, rgba(242, 233, 178, 0.72) 50%, rgba(242, 233, 178, 0.72) 100%);
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+    }
+    .center-banner-title {
+      margin: 0;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    @media (max-width: 760px) {
+      .hero-heading-row {
+        flex-direction: column;
+        gap: 10px;
+        margin: 6px 0 24px;
+      }
+      .brand-icon {
+        width: 82px;
+        height: 82px;
+      }
+      .center-banner-title {
+        font-size: 22px;
+        padding: 0 6px;
+      }
+    }
+
+    #home-news-section {
+      display: block;
+      margin-top: 8px;
+    }
+    .news-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .news-section-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1f2916;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 440px);
+      justify-content: start;
+      gap: 16px;
+    }
+    .news-card {
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 3px solid #4b5320;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+      display: flex;
+      flex-direction: column;
+    }
+    .news-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+    .news-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #2f3a19 0%, #4b5d24 55%, #6a7d37 100%);
+      color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .news-body {
+      padding: 13px 15px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .news-date {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #4b5320;
+    }
+    .news-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.28;
+      color: #1a1f14;
+    }
+    .news-text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.42;
+      color: #3f4737;
+      flex: 1;
+    }
+    .news-link {
+      display: inline-block;
+      margin-top: 4px;
+      color: #2e6b1e;
+      font-weight: 700;
+      font-size: 12.5px;
+      text-decoration: none;
+    }
+    .news-link:hover {
+      text-decoration: underline;
+      color: #4b5320;
+    }
+
+    #services-dropdown {
+      display: none;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 265px));
+      grid-template-rows: repeat(2, 112px);
+      justify-content: start;
+      gap: 12px;
+      padding-top: 4px;
+    }
+    @media (max-width: 1160px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+        justify-content: stretch;
+      }
+    }
+    @media (max-width: 640px) {
+      .cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+      }
+    }
+    .card {
+      position: relative;
+      background: linear-gradient(90deg, #dce4ef 0%, #e7ecf2 55%, #f0f3f6 100%);
+      border-top: 3px solid #4b5320;
+      border-radius: 8px;
+      padding: 10px 13px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+      min-height: 112px;
+      overflow: hidden;
+    }
+    .card.clickable-card {
+      cursor: pointer;
+    }
+    .card.clickable-card:hover {
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+    }
+    .diya-card-slot {
+      grid-column: 4;
+      grid-row: 1;
+    }
+    @media (max-width: 1160px) {
+      .diya-card-slot {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+    .card h3 {
+      margin: 0 0 3px;
+      font-size: 14.5px;
+      line-height: 1.22;
+      color: #1a1f14;
+    }
+    .card p {
+      margin: 0;
+      color: #4a5242;
+      font-size: 12px;
+      line-height: 1.28;
+    }
+    .card-has-corner-icon p,
+    .card-has-corner-icon .card-action {
+      padding-right: 36px;
+    }
+    .card-corner-icon {
+      position: absolute;
+      right: 9px;
+      bottom: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+      pointer-events: none;
+    }
+    .card-action {
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      color: #2e6b1e;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.25;
+      cursor: pointer;
+    }
+    .card-action:hover {
+      text-decoration: underline;
+      color: #4b5320;
+    }
+    #forms-panel,
+    #diya-subwindows {
+      display: none;
+      max-width: 780px;
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid #4b5320;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+    }
+    .diya-subwindows-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .diya-subwindows-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2c3514;
+    }
+    .forms-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #2c3514;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .forms-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #f3f6f9, #e7edf3);
+      border: 1px solid #c3ceb0;
+      border-left: 4px solid #4b5320;
+      border-radius: 7px;
+    }
+    .forms-item-title {
+      font-weight: 700;
+      color: #1a1f14;
+    }
+    .forms-item-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pdf-link-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(135deg, #4b5320, #6b8e23);
+      color: #ffffff;
+    }
+    .pdf-link-btn:hover {
+      filter: brightness(1.08);
+    }
+    .pdf-link-btn.secondary {
+      background: #ffffff;
+      color: #2c3514;
+      border: 1px solid #8fa064;
+    }
+    .pdf-link-btn.secondary:hover {
+      background: #eef5e3;
+      filter: none;
+    }
+    .forms-item-soon {
+      font-size: 12px;
+      color: #6b7360;
+      font-style: italic;
+    }
+    .diya-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .diya-mini-window {
+      background: linear-gradient(135deg, #f3f6f9, #e4ebf2);
+      border: 1px solid #8fa064;
+      border-left: 4px solid #4b5320;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .diya-mini-window:hover {
+      transform: translateY(-1px);
+      background: #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
+    .diya-mini-window.active-doc {
+      background: #eef5e3;
+      border-color: #2e6b1e;
+      box-shadow: 0 0 0 2px rgba(46, 107, 30, 0.22);
+    }
+    .diya-mini-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1f14;
+    }
+    .diya-mini-sub {
+      font-size: 11.5px;
+      color: #4a5242;
+    }
+    #diya-guide {
+      display: none;
+      max-width: 430px;
+      margin: 20px auto 0;
+      padding: 16px 18px;
+      background: #ffffff;
+      border: 2px solid #4b5320;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .diya-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .diya-header h2 {
+      margin: 0;
+      color: #4b5320;
+      font-size: 17px;
+    }
+    #diya-doc-name {
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #2e6b1e;
+    }
+    .diya-close {
+      background: #ecefe8;
+      color: #1f2419;
+      border: 1px solid #c6cdb9;
+      border-radius: 6px;
+      padding: 5px 11px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    #diya-step-desc {
+      margin: 0 0 12px;
+      color: #363d2e;
+      font-size: 14px;
+    }
+    .diya-step img {
+      max-width: 100%;
+      max-height: 350px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d5dacd;
+    }
+    .diya-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .diya-controls button {
+      background: linear-gradient(135deg, #4b5320, #6b8e23);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 13px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .diya-controls button:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+    .diya-controls button:disabled {
+      background: #c5c9be;
+      cursor: not-allowed;
+    }
+    #diya-counter {
+      font-weight: 700;
+      font-size: 13px;
+      min-width: 44px;
+    }
+    #diya-all-steps {
+      display: none;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e5d8;
+    }
+    .all-step-item {
+      margin-bottom: 14px;
+    }
+    .all-step-item img {
+      max-width: 100%;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d5dacd;
+    }
+    .site-footer {
+      background: #070806;
+      color: #ffffff;
+      padding: 14px 0;
+      font-size: 13.5px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 1 auto;
+    }
+    .footer-moment-banner {
+      display: block;
+      max-width: 100%;
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    .footer-muted {
+      color: #b8bdb3;
+      font-size: 12.5px;
+      margin-top: 4px;
+    }
+    @media (max-width: 760px) {
+      .site-footer {
+        padding: 12px 0;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
+      .footer-center {
+        width: 100%;
+        justify-content: center;
+      }
+      .footer-moment-banner {
+        height: 54px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="veteranam">
+    <div class="container">
+      <nav class="top-left-nav" aria-label="Меню порталу">
+        <button type="button" id="btn-home" class="nav-tab-btn active" aria-label="Головна" onclick="showHome()">
+          <span class="hamburger-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+        <button type="button" id="btn-services" class="nav-tab-btn" aria-expanded="false" onclick="toggleServices()">
+          <span>Сервіси</span>
+          <span id="services-arrow" aria-hidden="true">▾</span>
+        </button>
+      </nav>
+
+      <div class="hero-heading-row">
+        <a href="#veteranam" id="brand-link" class="brand" aria-label="Ветеран Голосіївського району" onclick="event.preventDefault(); showHome();">
+          <img src="favicon.png" alt="Герб порталу" class="brand-icon">
+        </a>
+        <h1 class="center-banner-title">Ветерани Голосіївського району</h1>
+      </div>
+
+      <section id="home-news-section" aria-label="Новини та події">
+        <div class="news-section-header">
+          <h2 class="news-section-title">Новини та події</h2>
+        </div>
+        <div id="news-grid" class="news-grid"></div>
+      </section>
+
+      <section id="services-dropdown" aria-label="Сервіси для ветеранів">
+        <div class="cards-grid">
+          <div class="card card-has-corner-icon clickable-card" onclick="toggleFormsPanel()">
+            <div>
+              <h3>Зразки заяв</h3>
+              <p>Заяви на допомогу, лікування, реабілітацію та звернення до установ району.</p>
+            </div>
+            <button type="button" class="card-action" onclick="event.stopPropagation(); toggleFormsPanel()">Переглянути перелік заяв →</button>
+            <img src="forms-icon.png" alt="Зразки заяв" class="card-corner-icon">
+          </div>
+
+          <div class="card card-has-corner-icon">
+            <div>
+              <h3>Допомога громади Києва</h3>
+              <p>Матеріальна підтримка та міські програми для ветеранів.</p>
+            </div>
+            <img src="kyiv-help-icon.png" alt="Допомога громади Києва" class="card-corner-icon">
+          </div>
+
+          <div class="card card-has-corner-icon">
+            <div>
+              <h3>Лікування та реабілітація</h3>
+              <p>Інформація про медичні заклади, лікування та реабілітаційні центри.</p>
+            </div>
+            <img src="med-icon.png" alt="Лікування та реабілітація" class="card-corner-icon">
+          </div>
+
+          <div class="card diya-card-slot card-has-corner-icon clickable-card" onclick="toggleDiyaSubwindows()">
+            <div>
+              <h3>Як завантажити документ у «Дії»</h3>
+              <p>Оберіть потрібний документ у випадаючому списку для перегляду інструкції.</p>
+            </div>
+            <button type="button" class="card-action" onclick="event.stopPropagation(); toggleDiyaSubwindows()">Обрати документ →</button>
+            <img src="diya-icon.png" alt="Як завантажити документ у «Дії»" class="card-corner-icon">
+          </div>
+
+          <div class="card card-has-corner-icon">
+            <div>
+              <h3>Пільги ветеранам</h3>
+              <p>Соціальні гарантії, компенсації та передбачені законом пільги.</p>
+            </div>
+            <img src="benefits-icon.png" alt="Пільги ветеранам" class="card-corner-icon">
+          </div>
+
+          <div class="card card-has-corner-icon">
+            <div>
+              <h3>Депутати Голосіївського району</h3>
+              <p>Контакти депутатів, графік прийому та подання звернень.</p>
+            </div>
+            <img src="deputy-icon.png" alt="Депутати Голосіївського району" class="card-corner-icon">
+          </div>
+
+          <div class="card card-has-corner-icon">
+            <div>
+              <h3>Юридична допомога</h3>
+              <p>Безоплатні юридичні консультації та правова підтримка.</p>
+            </div>
+            <img src="law-icon.png" alt="Юридична допомога" class="card-corner-icon">
+          </div>
+        </div>
+
+        <div id="forms-panel" aria-label="Зразки заяв">
+          <div class="diya-subwindows-header">
+            <h2 class="diya-subwindows-title">Зразки заяв</h2>
+            <button type="button" class="diya-close" onclick="closeFormsPanel()">Згорнути</button>
+          </div>
+          <ul class="forms-list">
+            <li class="forms-item">
+              <span class="forms-item-title">Заява на матеріальну допомогу (PDF)</span>
+              <div class="forms-item-actions">
+                <a href="zayava-materialna-dopomoga.pdf" target="_blank" rel="noopener" class="pdf-link-btn">Відкрити PDF</a>
+                <a href="zayava-materialna-dopomoga.pdf" download="Заява_на_матеріальну_допомогу.pdf" class="pdf-link-btn secondary">Завантажити</a>
+              </div>
+            </li>
+            <li class="forms-item">
+              <span class="forms-item-title">Заява на матеріальну допомогу депутату Київради та перелік документів</span>
+              <div class="forms-item-actions">
+                <a href="https://docs.google.com/document/d/1A6OblSaRihd3XiPZh9Bbh6HZP8XtX9IzF-CxKUDBwOY/edit?usp=sharing" target="_blank" rel="noopener" class="pdf-link-btn">Відкрити документ</a>
+              </div>
+            </li>
+            <li class="forms-item">
+              <span class="forms-item-title">Заява на лікування та реабілітацію</span>
+              <span class="forms-item-soon">зразок готується</span>
+            </li>
+            <li class="forms-item">
+              <span class="forms-item-title">Звернення до установ Голосіївського району</span>
+              <span class="forms-item-soon">зразок готується</span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="diya-subwindows" aria-label="Документи та витяги в Дії">
+          <div class="diya-subwindows-header">
+            <h2 class="diya-subwindows-title">Документи та витяги в «Дії»</h2>
+            <button type="button" class="diya-close" onclick="closeDiyaSubwindows()">Згорнути</button>
+          </div>
+          <div id="diya-mini-grid" class="diya-mini-grid"></div>
+        </div>
+
+        <div id="diya-guide" aria-label="Покрокова інструкція у застосунку Дія">
+          <div class="diya-header">
+            <h2 id="diya-step-title">Крок 1 з 5</h2>
+            <button type="button" class="diya-close" onclick="closeDiyaGuide()">Закрити</button>
+          </div>
+          <div id="diya-doc-name"></div>
+          <p id="diya-step-desc"></p>
+          <div class="diya-step">
+            <img id="diya-step-img" src="diya-step1.jpg" alt="Крок інструкції у застосунку Дія">
+          </div>
+          <div class="diya-controls">
+            <button type="button" id="diya-prev" onclick="changeDiyaStep(-1)">Назад</button>
+            <span id="diya-counter">1 / 5</span>
+            <button type="button" id="diya-next" onclick="changeDiyaStep(1)">Далі</button>
+            <button type="button" id="diya-all-btn" onclick="toggleAllDiyaSteps()">Показати всі кроки</button>
+          </div>
+          <div id="diya-all-steps"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contacts" class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Ветеран Голосіївського району</strong>
+        <div>03127, м. Київ, просп. Голосіївський, 42</div>
+        <div class="footer-muted">© 2026 Інформаційний портал для ветеранів.</div>
+      </div>
+      <div class="footer-center">
+        <img src="khvylyna-movchannya.jpg" alt="Загальнонаціональна хвилина мовчання 09:00" class="footer-moment-banner">
+      </div>
+      <div>
+        <strong>Контакти</strong>
+        <div class="footer-muted">Електронна пошта: info@veteran-golosiiv.example</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var activeDocIndex = 0;
+    var currentDiyaIndex = 0;
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderNews(items) {
+      var grid = document.getElementById("news-grid");
+      if (!grid) return;
+      var list = Array.isArray(items) ? items.slice(0, 1) : [];
+
+      if (list.length === 0) {
+        grid.innerHTML = "";
+        return;
+      }
+
+      grid.innerHTML = list.map(function (item) {
+        var mediaHtml = item.image
+          ? '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.title) + '" class="news-card-img">'
+          : '<div class="news-photo-placeholder">Мінветеранів<br>mva.gov.ua</div>';
+
+        var linkHtml = item.url
+          ? (item.url.charAt(0) === "#"
+              ? '<a href="' + escapeHtml(item.url) + '" class="news-link" onclick="event.preventDefault(); openServices();">Відкрити сервіси →</a>'
+              : '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener" class="news-link">Читати на сайті Мінветеранів →</a>')
+          : "";
+
+        return (
+          '<article class="news-card">' +
+            mediaHtml +
+            '<div class="news-body">' +
+              '<span class="news-date">' + escapeHtml(item.date || "Мінветеранів") + '</span>' +
+              '<h3 class="news-title">' + escapeHtml(item.title || "") + '</h3>' +
+              '<p class="news-text">' + escapeHtml(item.text || "") + '</p>' +
+              linkHtml +
+            '</div>' +
+          '</article>'
+        );
+      }).join("");
+    }
+
+    function loadNewsFromJson() {
+      if (typeof fetch !== "function") return;
+      fetch("./news.json?v=" + Date.now(), { cache: "no-store" })
+        .then(function (resp) {
+          if (!resp.ok) throw new Error("news.json status " + resp.status);
+          return resp.json();
+        })
+        .then(function (data) {
+          renderNews(data);
+        })
+        .catch(function () {
+          renderNews([]);
+        });
+    }
+
+    var diyaDocuments = [
+      {
+        id: "residence-extract",
+        title: "Витяг про місце проживання",
+        subtitle: "Інструкція у застосунку «Дія» (5 кроків)",
+        steps: [
+          { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
+          { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "У меню «Сервіси» оберіть розділ «Місце проживання»." },
+          { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
+          { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
+          { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
+        ]
+      },
+      {
+        id: "ok5-certificate",
+        title: "Довідка ОК-5",
+        subtitle: "Інструкція отримання у застосунку «Дія» (4 кроки)",
+        steps: [
+          { img: "ok5-step1.jpg", title: "Крок 1 з 4", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
+          { img: "ok5-step2.jpg", title: "Крок 2 з 4", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
+          { img: "ok5-step3.jpg", title: "Крок 3 з 4", desc: "У розділі «Довідки та витяги» оберіть «Довідка ОК-5»." },
+          { img: "ok5-step4.jpg", title: "Крок 4 з 4", desc: "Натисніть кнопку «Замовити довідку» та дочекайтеся її формування." }
+        ]
+      },
+      {
+        id: "criminal-record-extract",
+        title: "Витяг про несудимість",
+        subtitle: "Інструкція отримання у застосунку «Дія»",
+        steps: [
+          { img: "ok5-step1.jpg", title: "Крок 1", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
+          { img: "ok5-step2.jpg", title: "Крок 2", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
+          { img: "nesudymist-step3.jpg", title: "Крок 3", desc: "У розділі «Довідки та витяги» оберіть «Витяг про несудимість»." }
+        ]
+      }
+    ];
+
+    function showHome() {
+      var dropdown = document.getElementById("services-dropdown");
+      var homeNewsSection = document.getElementById("home-news-section");
+      var btnHome = document.getElementById("btn-home");
+      var btnServices = document.getElementById("btn-services");
+      var servicesArrow = document.getElementById("services-arrow");
+
+      if (dropdown) dropdown.style.display = "none";
+      if (homeNewsSection) homeNewsSection.style.display = "block";
+      if (btnServices) {
+        btnServices.classList.remove("active");
+        btnServices.setAttribute("aria-expanded", "false");
+      }
+      if (servicesArrow) servicesArrow.style.transform = "rotate(0deg)";
+      if (btnHome) btnHome.classList.add("active");
+    }
+
+    function openServices() {
+      var dropdown = document.getElementById("services-dropdown");
+      var homeNewsSection = document.getElementById("home-news-section");
+      var btnHome = document.getElementById("btn-home");
+      var btnServices = document.getElementById("btn-services");
+      var servicesArrow = document.getElementById("services-arrow");
+
+      if (homeNewsSection) homeNewsSection.style.display = "none";
+      if (dropdown) dropdown.style.display = "block";
+      if (btnServices) {
+        btnServices.classList.add("active");
+        btnServices.setAttribute("aria-expanded", "true");
+      }
+      if (servicesArrow) servicesArrow.style.transform = "rotate(180deg)";
+      if (btnHome) btnHome.classList.remove("active");
+    }
+
+    function toggleServices() {
+      var dropdown = document.getElementById("services-dropdown");
+      if (!dropdown) return;
+      var isOpen = window.getComputedStyle(dropdown).display === "block";
+      if (isOpen) {
+        showHome();
+      } else {
+        openServices();
+      }
+    }
+
+    function toggleFormsPanel() {
+      openServices();
+      var diyaSub = document.getElementById("diya-subwindows");
+      if (diyaSub) diyaSub.style.display = "none";
+      closeDiyaGuide();
+      var panel = document.getElementById("forms-panel");
+      if (!panel) return;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+        return;
+      }
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeFormsPanel() {
+      var panel = document.getElementById("forms-panel");
+      if (panel) panel.style.display = "none";
+    }
+
+    function renderDiyaMiniWindows() {
+      var grid = document.getElementById("diya-mini-grid");
+      var guide = document.getElementById("diya-guide");
+      if (!grid) return;
+      var guideOpen = guide && guide.style.display === "block";
+      grid.innerHTML = diyaDocuments.map(function (doc, idx) {
+        var isSelected = idx === activeDocIndex && guideOpen;
+        return (
+          '<button type="button" class="diya-mini-window' + (isSelected ? " active-doc" : "") + '" onclick="selectDiyaDocument(' + idx + ')">' +
+            '<span class="diya-mini-title">' + escapeHtml(doc.title) + '</span>' +
+            '<span class="diya-mini-sub">' + escapeHtml(doc.subtitle) + '</span>' +
+          '</button>'
+        );
+      }).join("");
+    }
+
+    function toggleDiyaSubwindows() {
+      openServices();
+      closeFormsPanel();
+      var box = document.getElementById("diya-subwindows");
+      if (!box) return;
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        closeDiyaGuide();
+        return;
+      }
+      renderDiyaMiniWindows();
+      box.style.display = "block";
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeDiyaSubwindows() {
+      var box = document.getElementById("diya-subwindows");
+      if (box) box.style.display = "none";
+      closeDiyaGuide();
+    }
+
+    function selectDiyaDocument(docIdx) {
+      activeDocIndex = docIdx;
+      currentDiyaIndex = 0;
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      var guide = document.getElementById("diya-guide");
+      if (allSteps) allSteps.style.display = "none";
+      if (allBtn) allBtn.textContent = "Показати всі кроки";
+      if (guide) {
+        guide.style.display = "block";
+        renderDiyaMiniWindows();
+        renderDiyaStep();
+        guide.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function renderDiyaStep() {
+      var doc = diyaDocuments[activeDocIndex];
+      var step = doc.steps[currentDiyaIndex];
+      var total = doc.steps.length;
+      document.getElementById("diya-doc-name").textContent = doc.title;
+      document.getElementById("diya-step-title").textContent = step.title;
+      document.getElementById("diya-step-desc").textContent = step.desc;
+      var imgEl = document.getElementById("diya-step-img");
+      imgEl.src = step.img;
+      imgEl.alt = doc.title + " — " + step.title;
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + total;
+      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === total - 1;
+    }
+
+    function closeDiyaGuide() {
+      var guide = document.getElementById("diya-guide");
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      if (guide) guide.style.display = "none";
+      if (allSteps) allSteps.style.display = "none";
+      if (allBtn) allBtn.textContent = "Показати всі кроки";
+      renderDiyaMiniWindows();
+    }
 
     function changeDiyaStep(delta) {
-      var total = diyaDocuments[activeDocIndex].steps.length;
-      var nextIndex = currentDiyaIndex + delta;
-      if (nextIndex >= 0 && nextIndex < total) {
-        currentDiyaIndex = nextIndex;
+      var doc = diyaDocuments[activeDocIndex];
+      var nextIdx = currentDiyaIndex + delta;
+      if (nextIdx >= 0 && nextIdx < doc.steps.length) {
+        currentDiyaIndex = nextIdx;
         renderDiyaStep();
       }
     }
 
     function toggleAllDiyaSteps() {
-      var doc = diyaDocuments[activeDocIndex];
-      var box = document.getElementById("diya-all-steps");
-      var btn = document.getElementById("diya-all-btn");
-      if (!box || !btn) return;
-      if (box.style.display === "block") {
-        box.style.display = "none";
-        btn.textContent = "Показати всі кроки";
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      if (!allSteps || !allBtn) return;
+      if (allSteps.style.display === "block") {
+        allSteps.style.display = "none";
+        allBtn.textContent = "Показати всі кроки";
         return;
       }
-      box.innerHTML = doc.steps.map(function (s) {
-        return '<div class="all-step-item"><div><strong>' + s.title + '</strong> — ' + s.desc + '</div><img src="' + s.img + '" alt="' + s.title + '"></div>';
+      var doc = diyaDocuments[activeDocIndex];
+      allSteps.innerHTML = doc.steps.map(function (st) {
+        return (
+          '<div class="all-step-item">' +
+            '<div><strong>' + escapeHtml(st.title) + '</strong> — ' + escapeHtml(st.desc) + '</div>' +
+            '<img src="' + escapeHtml(st.img) + '" alt="' + escapeHtml(doc.title + " — " + st.title) + '">' +
+          '</div>'
+        );
       }).join("");
-      box.style.display = "block";
-      btn.textContent = "Сховати всі кроки";
+      allSteps.style.display = "block";
+      allBtn.textContent = "Сховати всі кроки";
     }
 
     loadNewsFromJson();

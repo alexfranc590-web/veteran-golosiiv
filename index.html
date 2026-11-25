@@ -13,7 +13,7 @@
       background: linear-gradient(180deg, #4b5320 0%, #5c7422 14%, #6b8e23 22%, #c9dbcc 26%, #d9e8e3 30%, #e1ece8 100%);
       min-height: 100vh;
       color: #1f2419;
-      line-height: 1.35;
+      line-height: 1.4;
       display: flex;
       flex-direction: column;
     }
@@ -25,7 +25,7 @@
       width: 100%;
     }
     main {
-      padding: 16px 0 44px;
+      padding: 16px 0 40px;
       flex: 1;
     }
     .top-left-nav {
@@ -44,7 +44,7 @@
       background: #262925;
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 6px;
+      border-radius: 7px;
       padding: 8px 14px;
       font-size: 14px;
       font-weight: 700;
@@ -53,7 +53,7 @@
       align-items: center;
       justify-content: center;
       gap: 7px;
-      min-height: 36px;
+      min-height: 38px;
     }
     .nav-tab-btn:hover {
       background: #343832;
@@ -82,7 +82,7 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin: 12px 0 58px;
+      margin: 12px 0 36px;
       flex-wrap: wrap;
     }
     .brand {
@@ -112,9 +112,111 @@
     @media (max-width: 760px) {
       .top-left-nav {
         position: static;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+      }
+      .hero-heading-row {
+        flex-direction: column;
+        gap: 10px;
+        margin: 6px 0 24px;
+      }
+      .brand-icon {
+        width: 82px;
+        height: 82px;
+      }
+      .center-banner-title {
+        font-size: 22px;
+        padding: 0 6px;
       }
     }
+
+    /* Блок новин та фото на головній сторінці */
+    #home-news-section {
+      margin-top: 8px;
+    }
+    .news-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .news-section-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1f2916;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 960px) {
+      .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      .news-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+    }
+    .news-card {
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 3px solid #4b5320;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+      display: flex;
+      flex-direction: column;
+    }
+    .news-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #2f3a19 0%, #4b5d24 55%, #6a7d37 100%);
+      color: rgba(255, 255, 255, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .news-photo {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+    .news-body {
+      padding: 13px 15px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .news-date {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #4b5320;
+    }
+    .news-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.28;
+      color: #1a1f14;
+    }
+    .news-text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.42;
+      color: #3f4737;
+    }
+
     #services-dropdown {
       display: none;
     }
@@ -128,28 +230,30 @@
     }
     @media (max-width: 1160px) {
       .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 280px));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-template-rows: auto;
+        justify-content: stretch;
       }
     }
     @media (max-width: 640px) {
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto;
+        gap: 10px;
       }
     }
     .card {
       position: relative;
       background: linear-gradient(90deg, #dce4ef 0%, #e7ecf2 55%, #f0f3f6 100%);
       border-top: 3px solid #4b5320;
-      border-radius: 7px;
+      border-radius: 8px;
       padding: 10px 13px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 5px;
-      height: 112px;
+      min-height: 112px;
       overflow: hidden;
     }
     .card.clickable-card {
@@ -157,11 +261,6 @@
     }
     .card.clickable-card:hover {
       box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
-    }
-    @media (max-width: 1160px) {
-      .card {
-        height: 112px;
-      }
     }
     .diya-card-slot {
       grid-column: 4;
@@ -176,18 +275,18 @@
     .card h3 {
       margin: 0 0 3px;
       font-size: 14.5px;
-      line-height: 1.2;
+      line-height: 1.22;
       color: #1a1f14;
     }
     .card p {
       margin: 0;
       color: #4a5242;
       font-size: 12px;
-      line-height: 1.25;
+      line-height: 1.28;
     }
     .card-has-corner-icon p,
     .card-has-corner-icon .card-action {
-      padding-right: 34px;
+      padding-right: 36px;
     }
     .card-corner-icon {
       position: absolute;
@@ -207,8 +306,8 @@
       text-align: left;
       color: #2e6b1e;
       font-weight: 700;
-      font-size: 11.5px;
-      line-height: 1.2;
+      font-size: 12px;
+      line-height: 1.25;
       cursor: pointer;
     }
     .card-action:hover {
@@ -269,10 +368,11 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
     .pdf-link-btn {
       display: inline-block;
-      padding: 5px 11px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-size: 12.5px;
       font-weight: 700;
@@ -368,7 +468,7 @@
       color: #1f2419;
       border: 1px solid #c6cdb9;
       border-radius: 6px;
-      padding: 4px 10px;
+      padding: 5px 11px;
       cursor: pointer;
       font-weight: 600;
       font-size: 13px;
@@ -450,12 +550,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 1 1 260px;
+      flex: 1 1 240px;
     }
     .footer-moment-banner {
       display: block;
       max-width: 100%;
-      height: 82px;
+      height: 78px;
       width: auto;
       object-fit: contain;
       border-radius: 4px;
@@ -463,19 +563,24 @@
     .footer-muted {
       color: #b8bdb3;
       font-size: 13px;
-      margin-top: 6px;
+      margin-top: 5px;
     }
     @media (max-width: 760px) {
+      .site-footer {
+        padding: 18px 0;
+      }
       .footer-inner {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
       }
       .footer-center {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
       }
       .footer-moment-banner {
-        height: 76px;
+        height: 68px;
       }
     }
   </style>
@@ -503,6 +608,40 @@
         </a>
         <h1 class="center-banner-title">Ветерани Голосіївського району</h1>
       </div>
+
+      <section id="home-news-section" aria-label="Новини та події">
+        <div class="news-section-header">
+          <h2 class="news-section-title">Новини та події</h2>
+        </div>
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-photo-placeholder">Фото новини 1<br>(додамо фото за запитом)</div>
+            <div class="news-body">
+              <span class="news-date">Голосіївський район • Актуально</span>
+              <h3 class="news-title">Підтримка та консультації для ветеранів</h3>
+              <p class="news-text">Тут розміщуватимуться актуальні оголошення, зустрічі та корисні матеріали для ветеранів району.</p>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-photo-placeholder">Фото новини 2<br>(додамо фото за запитом)</div>
+            <div class="news-body">
+              <span class="news-date">Міські програми • Київ</span>
+              <h3 class="news-title">Реабілітація, лікування та пільги</h3>
+              <p class="news-text">Короткі новини про медичні заклади, соціальні гарантії та оформлення необхідних довідок.</p>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-photo-placeholder">Фото новини 3<br>(додамо фото за запитом)</div>
+            <div class="news-body">
+              <span class="news-date">Документи та звернення</span>
+              <h3 class="news-title">Зразки заяв та інструкції в «Дії»</h3>
+              <p class="news-text">Відкрийте розділ «Сервіси» у верхньому меню, щоб переглянути бланки заяв або покрокові інструкції.</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
       <section id="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
@@ -644,6 +783,7 @@
 
   <script>
     const dropdown = document.getElementById("services-dropdown");
+    const homeNewsSection = document.getElementById("home-news-section");
     const btnHome = document.getElementById("btn-home");
     const btnServices = document.getElementById("btn-services");
     const servicesArrow = document.getElementById("services-arrow");
@@ -651,6 +791,7 @@
 
     function showHome() {
       dropdown.style.display = "none";
+      homeNewsSection.style.display = "block";
       btnServices.classList.remove("active");
       btnServices.setAttribute("aria-expanded", "false");
       servicesArrow.style.transform = "rotate(0deg)";
@@ -658,6 +799,7 @@
     }
 
     function openServices() {
+      homeNewsSection.style.display = "none";
       dropdown.style.display = "block";
       btnServices.classList.add("active");
       btnServices.setAttribute("aria-expanded", "true");

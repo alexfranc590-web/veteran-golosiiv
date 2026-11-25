@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch and parse КП page
-        shell: python3
         run: |
+          python3 -c '
           import json
           import re
           import urllib.request
@@ -26,65 +26,44 @@ jobs:
           url = "https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu"
           req = urllib.request.Request(
               url,
-              headers={
-                  "User-Agent": "Mozilla/5.0 (compatible; GolosiivVeteranPortal/1.0)"
-              },
+              headers={"User-Agent": "Mozilla/5.0"}
           )
 
           try:
               with urllib.request.urlopen(req, timeout=20) as resp:
                   html = resp.read().decode("utf-8", errors="ignore")
-          except Exception as exc:
-              print("Fetch failed, keeping existing kp.json:", exc)
+          except Exception as e:
+              print("Fetch warning:", e)
               raise SystemExit(0)
 
-          h1_match = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S | re.I)
-          title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.S | re.I)
-
-          raw_title = ""
-          if h1_match:
-              raw_title = re.sub(r"<[^>]+>", " ", h1_match.group(1))
-          elif title_match:
-              raw_title = re.sub(r"<[^>]+>", " ", title_match.group(1))
-
-          clean_title = " ".join(unescape(raw_title).split()).strip()
+          h1 = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S | re.I)
+          title_tag = re.search(r"<title[^>]*>(.*?)</title>", html, re.S | re.I)
+          raw_title = h1.group(1) if h1 else (title_tag.group(1) if title_tag else "")
+          clean_title = " ".join(unescape(re.sub(r"<[^>]+>", " ", raw_title)).split()).strip()
           if not clean_title:
               clean_title = "Комунальні підприємства Голосіївського району"
 
-          items_found = []
-          for m in re.finditer(r"(?:КП\s*«[^»]+»|КП\s*\"[^\"]+\"|Комунальне підприємство\s*«[^»]+»)", html):
-              name = " ".join(unescape(m.group(0)).split())
-              if name not in items_found:
-                  items_found.append(name)
-
-          if items_found:
-              preview = ", ".join(items_found[:5])
-              text = f"Офіційний довідник КП району: {preview}."
-          else:
-              text = "Офіційний перелік комунальних підприємств Голосіївського району на вебпорталі Голосіївської РДА."
-
-          payload = [
+          data = [
               {
                   "date": "Голосіївська РДА • Довідник",
                   "title": clean_title,
-                  "text": text,
+                  "text": "Офіційний перелік та контакти комунальних підприємств Голосіївського району на порталі Голосіївської РДА.",
                   "url": url,
-                  "image": "golos-logo.png",
+                  "image": "golos-logo.png"
               }
           ]
 
           with open("kp.json", "w", encoding="utf-8") as f:
-              json.dump(payload, f, ensure_ascii=False, indent=2)
+              json.dump(data, f, ensure_ascii=False, indent=2)
               f.write("\n")
+          '
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add kp.json
-          if git diff --staged --quiet; then
-            echo "No changes in kp.json"
-          else
+          if ! git diff --staged --quiet; then
             git commit -m "Update Golosiiv KP directory data"
             git push
           fi

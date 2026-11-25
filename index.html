@@ -325,6 +325,7 @@
       font-size: 12px;
       line-height: 1.25;
       cursor: pointer;
+      text-decoration: none;
     }
     .card-action:hover {
       text-decoration: underline;
@@ -691,6 +692,15 @@
             </div>
             <img src="law-icon.png" alt="Юридична допомога" class="card-corner-icon">
           </div>
+
+          <div id="kp-service-card" class="card card-has-corner-icon clickable-card" onclick="openKpPortal()">
+            <div>
+              <h3 id="kp-card-title">Комунальні підприємства району</h3>
+              <p id="kp-card-text">Офіційний довідник КП Голосіївського району на порталі Голосіївської РДА.</p>
+            </div>
+            <a id="kp-card-link" href="https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu" target="_blank" rel="noopener" class="card-action" onclick="event.stopPropagation()">Відкрити довідник →</a>
+            <img src="golos-logo.png" alt="Голосіївська РДА" class="card-corner-icon">
+          </div>
         </div>
 
         <div id="forms-panel" aria-label="Зразки заяв">
@@ -773,6 +783,7 @@
   <script>
     var activeDocIndex = 0;
     var currentDiyaIndex = 0;
+    var kpPortalUrl = "https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu";
 
     var fallbackMvaNews = [
       {
@@ -837,6 +848,44 @@
         })
         .catch(function () {
           renderNews(fallbackMvaNews);
+        });
+    }
+
+    function openKpPortal() {
+      window.open(kpPortalUrl, "_blank", "noopener");
+    }
+
+    function applyKpData(items) {
+      if (!Array.isArray(items) || items.length === 0) return;
+      var entry = items[0];
+      var titleEl = document.getElementById("kp-card-title");
+      var textEl = document.getElementById("kp-card-text");
+      var linkEl = document.getElementById("kp-card-link");
+
+      if (entry.title && titleEl) {
+        titleEl.textContent = entry.title;
+      }
+      if (entry.text && textEl) {
+        textEl.textContent = entry.text;
+      }
+      if (entry.url && /^https?:\/\//i.test(entry.url)) {
+        kpPortalUrl = entry.url;
+        if (linkEl) linkEl.href = entry.url;
+      }
+    }
+
+    function loadKpFromJson() {
+      if (typeof fetch !== "function") return;
+      fetch("./kp.json?v=" + Date.now(), { cache: "no-store" })
+        .then(function (resp) {
+          if (!resp.ok) throw new Error("kp.json status " + resp.status);
+          return resp.json();
+        })
+        .then(function (data) {
+          applyKpData(data);
+        })
+        .catch(function () {
+          // Залишаємо базові дані картки
         });
     }
 
@@ -1051,6 +1100,7 @@
     }
 
     loadNewsFromJson();
+    loadKpFromJson();
   </script>
 </body>
 </html>

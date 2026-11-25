@@ -773,6 +773,16 @@
     var activeDocIndex = 0;
     var currentDiyaIndex = 0;
 
+    var fallbackMvaNews = [
+      {
+        date: "Мінветеранів • Актуально",
+        title: "Офіційні новини Міністерства у справах ветеранів України",
+        text: "Офіційні повідомлення, державні програми підтримки та актуальна інформація для ветеранів на порталі mva.gov.ua.",
+        url: "https://www.mva.gov.ua/",
+        image: ""
+      }
+    ];
+
     function escapeHtml(str) {
       return String(str || "")
         .replace(/&/g, "&amp;")
@@ -784,12 +794,7 @@
     function renderNews(items) {
       var grid = document.getElementById("news-grid");
       if (!grid) return;
-      var list = Array.isArray(items) ? items.slice(0, 1) : [];
-
-      if (list.length === 0) {
-        grid.innerHTML = "";
-        return;
-      }
+      var list = Array.isArray(items) && items.length > 0 ? items.slice(0, 1) : fallbackMvaNews;
 
       grid.innerHTML = list.map(function (item) {
         var mediaHtml = item.image
@@ -817,6 +822,7 @@
     }
 
     function loadNewsFromJson() {
+      renderNews(fallbackMvaNews);
       if (typeof fetch !== "function") return;
       fetch("./news.json?v=" + Date.now(), { cache: "no-store" })
         .then(function (resp) {
@@ -824,10 +830,12 @@
           return resp.json();
         })
         .then(function (data) {
-          renderNews(data);
+          if (Array.isArray(data) && data.length > 0) {
+            renderNews(data);
+          }
         })
         .catch(function () {
-          renderNews([]);
+          renderNews(fallbackMvaNews);
         });
     }
 

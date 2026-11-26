@@ -540,3 +540,206 @@
       if (entry.text && textEl) textEl.textContent = entry.text;
       if (entry.url && /^https?:\/\//i.test(entry.url)) {
         kpPortalUrl = entry.url;
+        if (linkEl) linkEl.href = entry.url;
+      }
+    }
+
+    function loadKpFromJson() {
+      if (typeof fetch !== "function") return;
+      fetch("./kp.json?v=" + Date.now(), { cache: "no-store" })
+        .then(function (resp) { return resp.ok ? resp.json() : null; })
+        .then(function (data) { applyKpData(data); })
+        .catch(function () {});
+    }
+
+    var diyaDocuments = [
+      {
+        id: "residence-extract",
+        title: "Витяг про місце проживання",
+        subtitle: "Інструкція у застосунку «Дія» (5 кроків)",
+        steps: [
+          { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
+          { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "У меню «Сервіси» оберіть розділ «Місце проживання»." },
+          { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
+          { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
+          { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
+        ]
+      },
+      {
+        id: "ok5-certificate",
+        title: "Довідка ОК-5",
+        subtitle: "Інструкція отримання у застосунку «Дія» (4 кроки)",
+        steps: [
+          { img: "ok5-step1.jpg", title: "Крок 1 з 4", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
+          { img: "ok5-step2.jpg", title: "Крок 2 з 4", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
+          { img: "ok5-step3.jpg", title: "Крок 3 з 4", desc: "У розділі «Довідки та витяги» оберіть «Довідка ОК-5»." },
+          { img: "ok5-step4.jpg", title: "Крок 4 з 4", desc: "Натисніть кнопку «Замовити довідку» та дочекайтеся її формування." }
+        ]
+      },
+      {
+        id: "criminal-record-extract",
+        title: "Витяг про несудимість",
+        subtitle: "Інструкція отримання у застосунку «Дія»",
+        steps: [
+          { img: "ok5-step1.jpg", title: "Крок 1", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
+          { img: "ok5-step2.jpg", title: "Крок 2", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
+          { img: "nesudymist-step3.jpg", title: "Крок 3", desc: "У розділі «Довідки та витяги» оберіть «Витяг про несудимість»." }
+        ]
+      }
+    ];
+
+    function showHome() {
+      var dropdown = document.getElementById("services-dropdown");
+      var btnHome = document.getElementById("btn-home");
+      var btnServices = document.getElementById("btn-services");
+      var servicesArrow = document.getElementById("services-arrow");
+      if (dropdown) dropdown.style.display = "none";
+      if (btnServices) { btnServices.classList.remove("active"); btnServices.setAttribute("aria-expanded", "false"); }
+      if (servicesArrow) servicesArrow.style.transform = "rotate(0deg)";
+      if (btnHome) btnHome.classList.add("active");
+    }
+
+    function openServices() {
+      var dropdown = document.getElementById("services-dropdown");
+      var btnHome = document.getElementById("btn-home");
+      var btnServices = document.getElementById("btn-services");
+      var servicesArrow = document.getElementById("services-arrow");
+      if (dropdown) dropdown.style.display = "block";
+      if (btnServices) { btnServices.classList.add("active"); btnServices.setAttribute("aria-expanded", "true"); }
+      if (servicesArrow) servicesArrow.style.transform = "rotate(180deg)";
+      if (btnHome) btnHome.classList.remove("active");
+    }
+
+    function toggleServices() {
+      var dropdown = document.getElementById("services-dropdown");
+      if (!dropdown) return;
+      if (window.getComputedStyle(dropdown).display === "block") showHome();
+      else openServices();
+    }
+
+    function toggleFormsPanel() {
+      openServices();
+      var diyaSub = document.getElementById("diya-subwindows");
+      if (diyaSub) diyaSub.style.display = "none";
+      closeDiyaGuide();
+      var panel = document.getElementById("forms-panel");
+      if (!panel) return;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+      if (panel.style.display === "block") panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeFormsPanel() {
+      var panel = document.getElementById("forms-panel");
+      if (panel) panel.style.display = "none";
+    }
+
+    function renderDiyaMiniWindows() {
+      var grid = document.getElementById("diya-mini-grid");
+      var guide = document.getElementById("diya-guide");
+      if (!grid) return;
+      var guideOpen = guide && guide.style.display === "block";
+      grid.innerHTML = diyaDocuments.map(function (doc, idx) {
+        var isSelected = idx === activeDocIndex && guideOpen;
+        return '<button type="button" class="diya-mini-window' + (isSelected ? " active-doc" : "") + '" onclick="selectDiyaDocument(' + idx + ')">' +
+          '<span class="diya-mini-title">' + escapeHtml(doc.title) + '</span>' +
+          '<span class="diya-mini-sub">' + escapeHtml(doc.subtitle) + '</span>' +
+        '</button>';
+      }).join("");
+    }
+
+    function toggleDiyaSubwindows() {
+      openServices();
+      closeFormsPanel();
+      var box = document.getElementById("diya-subwindows");
+      if (!box) return;
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        closeDiyaGuide();
+        return;
+      }
+      renderDiyaMiniWindows();
+      box.style.display = "block";
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function closeDiyaSubwindows() {
+      var box = document.getElementById("diya-subwindows");
+      if (box) box.style.display = "none";
+      closeDiyaGuide();
+    }
+
+    function selectDiyaDocument(docIdx) {
+      activeDocIndex = docIdx;
+      currentDiyaIndex = 0;
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      var guide = document.getElementById("diya-guide");
+      if (allSteps) allSteps.style.display = "none";
+      if (allBtn) allBtn.textContent = "Показати всі кроки";
+      if (guide) {
+        guide.style.display = "block";
+        renderDiyaMiniWindows();
+        renderDiyaStep();
+        guide.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function renderDiyaStep() {
+      var doc = diyaDocuments[activeDocIndex];
+      var step = doc.steps[currentDiyaIndex];
+      var total = doc.steps.length;
+      document.getElementById("diya-doc-name").textContent = doc.title;
+      document.getElementById("diya-step-title").textContent = step.title;
+      document.getElementById("diya-step-desc").textContent = step.desc;
+      var imgEl = document.getElementById("diya-step-img");
+      imgEl.src = step.img;
+      imgEl.alt = doc.title + " — " + step.title;
+      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + total;
+      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
+      document.getElementById("diya-next").disabled = currentDiyaIndex === total - 1;
+    }
+
+    function closeDiyaGuide() {
+      var guide = document.getElementById("diya-guide");
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      if (guide) guide.style.display = "none";
+      if (allSteps) allSteps.style.display = "none";
+      if (allBtn) allBtn.textContent = "Показати всі кроки";
+      renderDiyaMiniWindows();
+    }
+
+    function changeDiyaStep(delta) {
+      var doc = diyaDocuments[activeDocIndex];
+      var nextIdx = currentDiyaIndex + delta;
+      if (nextIdx >= 0 && nextIdx < doc.steps.length) {
+        currentDiyaIndex = nextIdx;
+        renderDiyaStep();
+      }
+    }
+
+    function toggleAllDiyaSteps() {
+      var allSteps = document.getElementById("diya-all-steps");
+      var allBtn = document.getElementById("diya-all-btn");
+      if (!allSteps || !allBtn) return;
+      if (allSteps.style.display === "block") {
+        allSteps.style.display = "none";
+        allBtn.textContent = "Показати всі кроки";
+        return;
+      }
+      var doc = diyaDocuments[activeDocIndex];
+      allSteps.innerHTML = doc.steps.map(function (st) {
+        return '<div class="all-step-item">' +
+          '<div><strong>' + escapeHtml(st.title) + '</strong> — ' + escapeHtml(st.desc) + '</div>' +
+          '<img src="' + escapeHtml(st.img) + '" alt="' + escapeHtml(doc.title + " — " + st.title) + '">' +
+        '</div>';
+      }).join("");
+      allSteps.style.display = "block";
+      allBtn.textContent = "Сховати всі кроки";
+    }
+
+    loadNewsFromJson();
+    loadKpFromJson();
+  </script>
+</body>
+</html>

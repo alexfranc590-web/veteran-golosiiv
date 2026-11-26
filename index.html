@@ -32,8 +32,10 @@
       width: 100%;
     }
     main {
-      padding: 14px 0 28px;
+      padding: 14px 0 0;
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     .top-bar-row {
       display: flex;
@@ -186,32 +188,20 @@
     }
     #home-hero-photo {
       width: 100%;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.92);
-      border-top: 4px solid #4b5320;
-      border-radius: 12px;
-      padding: 10px 10px 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
     }
     .home-photo-img {
       display: block;
       width: 100%;
-      height: 410px;
-      object-fit: cover;
-      object-position: center 30%;
-      border-radius: 8px;
+      height: auto;
+      object-fit: contain;
     }
-    .home-photo-caption {
-      margin-top: 8px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #2c3514;
+    #services-dropdown {
+      display: none;
+      padding-bottom: 40px;
     }
-    @media (max-width: 760px) {
-      .home-photo-img { height: 240px; }
-    }
-    #services-dropdown { display: none; }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 265px));
@@ -434,12 +424,13 @@
         </a>
         <h1 id="hero-title" class="center-banner-title">Ветерани Голосіївського району</h1>
       </div>
+    </div>
 
-      <section id="home-hero-photo" aria-label="Рада ветеранів Голосіївського району">
-        <img src="rada-veteraniv.jpg" alt="Рада ветеранів Голосіївського району м. Києва" class="home-photo-img">
-        <div id="home-photo-caption" class="home-photo-caption">Рада ветеранів Голосіївського району м. Києва</div>
-      </section>
+    <section id="home-hero-photo" aria-label="Рада ветеранів Голосіївського району">
+      <img src="rada-veteraniv.jpg" alt="Рада ветеранів Голосіївського району м. Києва" class="home-photo-img">
+    </section>
 
+    <div class="container">
       <section id="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
           <div class="card card-has-corner-icon clickable-card" onclick="toggleFormsPanel()">
@@ -623,7 +614,6 @@
         pageTitle: "Ветеран Голосіївського району",
         servicesBtn: "Сервіси",
         heroTitle: "Ветерани Голосіївського району",
-        photoCaption: "Рада ветеранів Голосіївського району м. Києва",
         formsTitle: "Зразки заяв",
         formsDesc: "Заяви на допомогу, лікування, реабілітацію та звернення до установ району.",
         formsAction: "Переглянути перелік заяв →",
@@ -672,7 +662,6 @@
         pageTitle: "Veteran — Holosiivskyi District",
         servicesBtn: "Services",
         heroTitle: "Veterans of Holosiivskyi District",
-        photoCaption: "Veterans Council of Holosiivskyi District, Kyiv",
         formsTitle: "Application Templates",
         formsDesc: "Applications for assistance, medical care, rehabilitation, and inquiries to district institutions.",
         formsAction: "View list of applications →",
@@ -791,7 +780,6 @@
       var map = {
         "services-btn-label": t.servicesBtn,
         "hero-title": t.heroTitle,
-        "home-photo-caption": t.photoCaption,
         "card-forms-title": t.formsTitle,
         "card-forms-desc": t.formsDesc,
         "card-forms-action": t.formsAction,

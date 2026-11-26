@@ -763,6 +763,10 @@
       }
     ];
 
+    function saveServicesState(isOpen) {
+      try { localStorage.setItem("veteranServicesOpen", isOpen ? "1" : "0"); } catch (e) {}
+    }
+
     function getDocTitle(doc) {
       return typeof doc.title === "string" ? doc.title : (doc.title[currentLang] || doc.title.uk);
     }
@@ -786,16 +790,10 @@
     }
 
     function reloadPageSafely() {
-      try {
-        showHome();
-        closeFormsPanel();
-        closeDiyaSubwindows();
-        var url = new URL(window.location.href);
-        url.searchParams.set("refresh", String(Date.now()));
-        window.location.replace(url.toString());
-      } catch (e) {
-        window.location.reload();
-      }
+      var dropdown = document.getElementById("services-dropdown");
+      var isServicesOpen = dropdown && window.getComputedStyle(dropdown).display === "block";
+      saveServicesState(Boolean(isServicesOpen));
+      window.location.reload();
     }
 
     function setLanguage(lang) {
@@ -947,6 +945,7 @@
       if (btnServices) { btnServices.classList.remove("active"); btnServices.setAttribute("aria-expanded", "false"); }
       if (servicesArrow) servicesArrow.style.transform = "rotate(0deg)";
       if (btnHome) btnHome.classList.add("active");
+      saveServicesState(false);
     }
 
     function openServices() {
@@ -960,6 +959,7 @@
       if (btnServices) { btnServices.classList.add("active"); btnServices.setAttribute("aria-expanded", "true"); }
       if (servicesArrow) servicesArrow.style.transform = "rotate(180deg)";
       if (btnHome) btnHome.classList.remove("active");
+      saveServicesState(true);
     }
 
     function toggleServices() {
@@ -1100,6 +1100,7 @@
       if (!isNaN(savedFont)) applyFontSize(savedFont);
       var savedLang = localStorage.getItem("veteranLang");
       if (savedLang === "en" || savedLang === "uk") setLanguage(savedLang);
+      if (localStorage.getItem("veteranServicesOpen") === "1") openServices();
     } catch (e) {}
 
     loadNewsFromJson();

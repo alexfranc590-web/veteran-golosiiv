@@ -67,9 +67,7 @@
       min-height: 38px;
       user-select: none;
     }
-    .nav-tab-btn:hover {
-      background: #343832;
-    }
+    .nav-tab-btn:hover { background: #343832; }
     .nav-tab-btn.active {
       background: #181a17;
       border-color: rgba(255, 255, 255, 0.75);
@@ -126,24 +124,11 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
     @media (max-width: 760px) {
-      .hero-heading-row {
-        flex-direction: column;
-        gap: 10px;
-        margin: 6px 0 24px;
-      }
-      .brand-icon {
-        width: 82px;
-        height: 82px;
-      }
-      .center-banner-title {
-        font-size: 22px;
-        padding: 0 6px;
-      }
+      .hero-heading-row { flex-direction: column; gap: 10px; margin: 6px 0 24px; }
+      .brand-icon { width: 82px; height: 82px; }
+      .center-banner-title { font-size: 22px; padding: 0 6px; }
     }
-
-    #services-dropdown {
-      display: none;
-    }
+    #services-dropdown { display: none; }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 265px));
@@ -153,16 +138,10 @@
       padding-top: 4px;
     }
     @media (max-width: 1160px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        justify-content: stretch;
-      }
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
     }
     @media (max-width: 640px) {
-      .cards-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
-      }
+      .cards-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
     }
     .card {
       position: relative;
@@ -178,38 +157,16 @@
       min-height: 118px;
       overflow: hidden;
     }
-    .card.clickable-card {
-      cursor: pointer;
-    }
-    .card.clickable-card:hover {
-      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
-    }
-    .diya-card-slot {
-      grid-column: 4;
-      grid-row: 1;
-    }
+    .card.clickable-card { cursor: pointer; }
+    .card.clickable-card:hover { box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16); }
+    .diya-card-slot { grid-column: 4; grid-row: 1; }
     @media (max-width: 1160px) {
-      .diya-card-slot {
-        grid-column: auto;
-        grid-row: auto;
-      }
+      .diya-card-slot { grid-column: auto; grid-row: auto; }
     }
-    .card h3 {
-      margin: 0 0 3px;
-      font-size: 14.5px;
-      line-height: 1.22;
-      color: #1a1f14;
-    }
-    .card p {
-      margin: 0;
-      color: #4a5242;
-      font-size: 12px;
-      line-height: 1.28;
-    }
+    .card h3 { margin: 0 0 3px; font-size: 14.5px; line-height: 1.22; color: #1a1f14; }
+    .card p { margin: 0; color: #4a5242; font-size: 12px; line-height: 1.28; }
     .card-has-corner-icon p,
-    .card-has-corner-icon .card-action {
-      padding-right: 36px;
-    }
+    .card-has-corner-icon .card-action { padding-right: 36px; }
     .card-corner-icon {
       position: absolute;
       right: 9px;
@@ -271,12 +228,8 @@
       cursor: pointer;
       text-decoration: none;
     }
-    .card-action:hover {
-      text-decoration: underline;
-      color: #4b5320;
-    }
-    #forms-panel,
-    #diya-subwindows {
+    .card-action:hover { text-decoration: underline; color: #4b5320; }
+    #forms-panel, #diya-subwindows {
       display: none;
       max-width: 780px;
       margin: 18px auto 0;
@@ -293,256 +246,67 @@
       gap: 10px;
       margin-bottom: 10px;
     }
-    .diya-subwindows-title {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 700;
-      color: #2c3514;
-    }
+    .diya-subwindows-title { margin: 0; font-size: 15px; font-weight: 700; color: #2c3514; }
     .forms-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      color: #2c3514;
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin: 0; padding: 0; list-style: none; color: #2c3514; font-size: 14px;
+      display: flex; flex-direction: column; gap: 8px;
     }
     .forms-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
       padding: 8px 12px;
       background: linear-gradient(135deg, #f3f6f9, #e7edf3);
-      border: 1px solid #c3ceb0;
-      border-left: 4px solid #4b5320;
-      border-radius: 7px;
+      border: 1px solid #c3ceb0; border-left: 4px solid #4b5320; border-radius: 7px;
     }
-    .forms-item-title {
-      font-weight: 700;
-      color: #1a1f14;
-    }
-    .forms-item-actions {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .forms-item-title { font-weight: 700; color: #1a1f14; }
+    .forms-item-actions { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .pdf-link-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12.5px;
-      font-weight: 700;
-      text-decoration: none;
-      background: linear-gradient(135deg, #4b5320, #6b8e23);
-      color: #ffffff;
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 700;
+      text-decoration: none; background: linear-gradient(135deg, #4b5320, #6b8e23); color: #ffffff;
     }
-    .pdf-link-btn:hover {
-      filter: brightness(1.08);
-    }
-    .pdf-link-btn.secondary {
-      background: #ffffff;
-      color: #2c3514;
-      border: 1px solid #8fa064;
-    }
-    .pdf-link-btn.secondary:hover {
-      background: #eef5e3;
-      filter: none;
-    }
-    .forms-item-soon {
-      font-size: 12px;
-      color: #6b7360;
-      font-style: italic;
-    }
-    .diya-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 10px;
-    }
+    .pdf-link-btn.secondary { background: #ffffff; color: #2c3514; border: 1px solid #8fa064; }
+    .forms-item-soon { font-size: 12px; color: #6b7360; font-style: italic; }
+    .diya-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
     .diya-mini-window {
-      background: linear-gradient(135deg, #f3f6f9, #e4ebf2);
-      border: 1px solid #8fa064;
-      border-left: 4px solid #4b5320;
-      border-radius: 8px;
-      padding: 10px 12px;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      background: linear-gradient(135deg, #f3f6f9, #e4ebf2); border: 1px solid #8fa064;
+      border-left: 4px solid #4b5320; border-radius: 8px; padding: 10px 12px; text-align: left;
+      cursor: pointer; display: flex; flex-direction: column; gap: 4px;
     }
-    .diya-mini-window:hover {
-      transform: translateY(-1px);
-      background: #ffffff;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-    }
-    .diya-mini-window.active-doc {
-      background: #eef5e3;
-      border-color: #2e6b1e;
-      box-shadow: 0 0 0 2px rgba(46, 107, 30, 0.22);
-    }
-    .diya-mini-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #1a1f14;
-    }
-    .diya-mini-sub {
-      font-size: 11.5px;
-      color: #4a5242;
-    }
+    .diya-mini-window.active-doc { background: #eef5e3; border-color: #2e6b1e; }
+    .diya-mini-title { font-size: 13px; font-weight: 700; color: #1a1f14; }
+    .diya-mini-sub { font-size: 11.5px; color: #4a5242; }
     #diya-guide {
-      display: none;
-      max-width: 430px;
-      margin: 20px auto 0;
-      padding: 16px 18px;
-      background: #ffffff;
-      border: 2px solid #4b5320;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-      text-align: center;
+      display: none; max-width: 430px; margin: 20px auto 0; padding: 16px 18px;
+      background: #ffffff; border: 2px solid #4b5320; border-radius: 12px; text-align: center;
     }
-    .diya-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-    .diya-header h2 {
-      margin: 0;
-      color: #4b5320;
-      font-size: 17px;
-    }
-    #diya-doc-name {
-      margin: 0 0 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #2e6b1e;
-    }
+    .diya-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+    .diya-header h2 { margin: 0; color: #4b5320; font-size: 17px; }
+    #diya-doc-name { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #2e6b1e; }
     .diya-close {
-      background: #ecefe8;
-      color: #1f2419;
-      border: 1px solid #c6cdb9;
-      border-radius: 6px;
-      padding: 5px 11px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 13px;
+      background: #ecefe8; color: #1f2419; border: 1px solid #c6cdb9; border-radius: 6px;
+      padding: 5px 11px; cursor: pointer; font-weight: 600; font-size: 13px;
     }
-    #diya-step-desc {
-      margin: 0 0 12px;
-      color: #363d2e;
-      font-size: 14px;
-    }
-    .diya-step img {
-      max-width: 100%;
-      max-height: 350px;
-      width: auto;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid #d5dacd;
-    }
-    .diya-controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 12px;
-    }
+    #diya-step-desc { margin: 0 0 12px; color: #363d2e; font-size: 14px; }
+    .diya-step img { max-width: 100%; max-height: 350px; border-radius: 8px; border: 1px solid #d5dacd; }
+    .diya-controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-top: 12px; }
     .diya-controls button {
-      background: linear-gradient(135deg, #4b5320, #6b8e23);
-      color: #ffffff;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 13px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
+      background: linear-gradient(135deg, #4b5320, #6b8e23); color: #ffffff; border: none;
+      border-radius: 6px; padding: 7px 13px; font-weight: 700; font-size: 13px; cursor: pointer;
     }
-    .diya-controls button:hover:not(:disabled) {
-      filter: brightness(1.08);
-    }
-    .diya-controls button:disabled {
-      background: #c5c9be;
-      cursor: not-allowed;
-    }
-    #diya-counter {
-      font-weight: 700;
-      font-size: 13px;
-      min-width: 44px;
-    }
-    #diya-all-steps {
-      display: none;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid #e0e5d8;
-    }
-    .all-step-item {
-      margin-bottom: 14px;
-    }
-    .all-step-item img {
-      max-width: 100%;
-      max-height: 300px;
-      width: auto;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid #d5dacd;
-    }
-    .site-footer {
-      background: #070806;
-      color: #ffffff;
-      padding: 14px 0;
-      font-size: 13.5px;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .footer-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 1 auto;
-    }
-    .footer-moment-banner {
-      display: block;
-      max-width: 100%;
-      height: 64px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-    .footer-muted {
-      color: #b8bdb3;
-      font-size: 12.5px;
-      margin-top: 4px;
-    }
+    .diya-controls button:disabled { background: #c5c9be; cursor: not-allowed; }
+    #diya-counter { font-weight: 700; font-size: 13px; min-width: 44px; }
+    #diya-all-steps { display: none; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e0e5d8; }
+    .all-step-item { margin-bottom: 14px; }
+    .all-step-item img { max-width: 100%; max-height: 300px; border-radius: 8px; border: 1px solid #d5dacd; }
+    .site-footer { background: #070806; color: #ffffff; padding: 14px 0; font-size: 13.5px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-center { display: flex; align-items: center; justify-content: center; flex: 0 1 auto; }
+    .footer-moment-banner { display: block; max-width: 100%; height: 64px; width: auto; object-fit: contain; border-radius: 4px; }
+    .footer-muted { color: #b8bdb3; font-size: 12.5px; margin-top: 4px; }
     @media (max-width: 760px) {
-      .site-footer {
-        padding: 12px 0;
-      }
-      .footer-inner {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-      }
-      .footer-center {
-        width: 100%;
-        justify-content: center;
-      }
-      .footer-moment-banner {
-        height: 54px;
-      }
+      .site-footer { padding: 12px 0; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+      .footer-center { width: 100%; justify-content: center; }
+      .footer-moment-banner { height: 54px; }
     }
   </style>
 </head>
@@ -551,11 +315,7 @@
     <div class="container">
       <nav class="top-left-nav" aria-label="Меню порталу">
         <button type="button" id="btn-home" class="nav-tab-btn active" aria-label="Головна" onclick="showHome()">
-          <span class="hamburger-lines" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
+          <span class="hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
         <button type="button" id="btn-services" class="nav-tab-btn" aria-expanded="false" onclick="toggleServices()">
           <span>Сервіси</span>
@@ -744,9 +504,7 @@
         .replace(/"/g, "&quot;");
     }
 
-    function openMvaPortal() {
-      window.open(mvaPortalUrl, "_blank", "noopener");
-    }
+    function openMvaPortal() { window.open(mvaPortalUrl, "_blank", "noopener"); }
 
     function applyNewsData(items) {
       if (!Array.isArray(items) || items.length === 0) return;
@@ -754,13 +512,8 @@
       var titleEl = document.getElementById("mva-card-title");
       var textEl = document.getElementById("mva-card-text");
       var linkEl = document.getElementById("mva-card-link");
-
-      if (entry.title && titleEl) {
-        titleEl.textContent = entry.title;
-      }
-      if (entry.text && textEl) {
-        textEl.textContent = entry.text;
-      }
+      if (entry.title && titleEl) titleEl.textContent = entry.title;
+      if (entry.text && textEl) textEl.textContent = entry.text;
       if (entry.url && /^https?:\/\//i.test(entry.url)) {
         mvaPortalUrl = entry.url;
         if (linkEl) linkEl.href = entry.url;
@@ -770,21 +523,12 @@
     function loadNewsFromJson() {
       if (typeof fetch !== "function") return;
       fetch("./news.json?v=" + Date.now(), { cache: "no-store" })
-        .then(function (resp) {
-          if (!resp.ok) throw new Error("news.json status " + resp.status);
-          return resp.json();
-        })
-        .then(function (data) {
-          applyNewsData(data);
-        })
-        .catch(function () {
-          // Залишаємо базові дані картки
-        });
+        .then(function (resp) { return resp.ok ? resp.json() : null; })
+        .then(function (data) { applyNewsData(data); })
+        .catch(function () {});
     }
 
-    function openKpPortal() {
-      window.open(kpPortalUrl, "_blank", "noopener");
-    }
+    function openKpPortal() { window.open(kpPortalUrl, "_blank", "noopener"); }
 
     function applyKpData(items) {
       if (!Array.isArray(items) || items.length === 0) return;
@@ -792,83 +536,7 @@
       var titleEl = document.getElementById("kp-card-title");
       var textEl = document.getElementById("kp-card-text");
       var linkEl = document.getElementById("kp-card-link");
-
-      if (entry.title && titleEl) {
-        titleEl.textContent = entry.title;
-      }
-      if (entry.text && textEl) {
-        textEl.textContent = entry.text;
-      }
+      if (entry.title && titleEl) titleEl.textContent = entry.title;
+      if (entry.text && textEl) textEl.textContent = entry.text;
       if (entry.url && /^https?:\/\//i.test(entry.url)) {
         kpPortalUrl = entry.url;
-        if (linkEl) linkEl.href = entry.url;
-      }
-    }
-
-    function loadKpFromJson() {
-      if (typeof fetch !== "function") return;
-      fetch("./kp.json?v=" + Date.now(), { cache: "no-store" })
-        .then(function (resp) {
-          if (!resp.ok) throw new Error("kp.json status " + resp.status);
-          return resp.json();
-        })
-        .then(function (data) {
-          applyKpData(data);
-        })
-        .catch(function () {
-          // Залишаємо базові дані картки
-        });
-    }
-
-    var diyaDocuments = [
-      {
-        id: "residence-extract",
-        title: "Витяг про місце проживання",
-        subtitle: "Інструкція у застосунку «Дія» (5 кроків)",
-        steps: [
-          { img: "diya-step1.jpg", title: "Крок 1 з 5", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси»." },
-          { img: "diya-step2.jpg", title: "Крок 2 з 5", desc: "У меню «Сервіси» оберіть розділ «Місце проживання»." },
-          { img: "diya-step3.jpg", title: "Крок 3 з 5", desc: "Оберіть пункт «Витяг про місце проживання»." },
-          { img: "diya-step4.jpg", title: "Крок 4 з 5", desc: "У вікні «Замовляйте витяг через Дія.AI» натисніть «Спробувати пізніше»." },
-          { img: "diya-step5.jpg", title: "Крок 5 з 5", desc: "Натисніть кнопку «Замовити витяг» та дочекайтеся формування документа." }
-        ]
-      },
-      {
-        id: "ok5-certificate",
-        title: "Довідка ОК-5",
-        subtitle: "Інструкція отримання у застосунку «Дія» (4 кроки)",
-        steps: [
-          { img: "ok5-step1.jpg", title: "Крок 1 з 4", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
-          { img: "ok5-step2.jpg", title: "Крок 2 з 4", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
-          { img: "ok5-step3.jpg", title: "Крок 3 з 4", desc: "У розділі «Довідки та витяги» оберіть «Довідка ОК-5»." },
-          { img: "ok5-step4.jpg", title: "Крок 4 з 4", desc: "Натисніть кнопку «Замовити довідку» та дочекайтеся її формування." }
-        ]
-      },
-      {
-        id: "criminal-record-extract",
-        title: "Витяг про несудимість",
-        subtitle: "Інструкція отримання у застосунку «Дія»",
-        steps: [
-          { img: "ok5-step1.jpg", title: "Крок 1", desc: "Відкрийте застосунок «Дія» та перейдіть до розділу «Сервіси» у нижньому меню." },
-          { img: "ok5-step2.jpg", title: "Крок 2", desc: "У меню «Сервіси» натисніть «Довідки та витяги»." },
-          { img: "nesudymist-step3.jpg", title: "Крок 3", desc: "У розділі «Довідки та витяги» оберіть «Витяг про несудимість»." }
-        ]
-      }
-    ];
-
-    function showHome() {
-      var dropdown = document.getElementById("services-dropdown");
-      var btnHome = document.getElementById("btn-home");
-      var btnServices = document.getElementById("btn-services");
-      var servicesArrow = document.getElementById("services-arrow");
-
-      if (dropdown) dropdown.style.display = "none";
-      if (btnServices) {
-        btnServices.classList.remove("active");
-        btnServices.setAttribute("aria-expanded", "false");
-      }
-      if (servicesArrow) servicesArrow.style.transform = "rotate(0deg)";
-      if (btnHome) btnHome.classList.add("active");
-    }
-
-    function open

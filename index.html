@@ -141,105 +141,13 @@
       }
     }
 
-    #home-news-section {
-      display: block;
-      margin-top: 8px;
-    }
-    .news-section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .news-section-title {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 700;
-      color: #1f2916;
-    }
-    .news-grid {
-      display: grid;
-      grid-template-columns: minmax(280px, 440px);
-      justify-content: start;
-      gap: 16px;
-    }
-    .news-card {
-      background: rgba(255, 255, 255, 0.94);
-      border-top: 3px solid #2b3c4e;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
-      display: flex;
-      flex-direction: column;
-    }
-    .news-card-img {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      display: block;
-    }
-    .news-mva-banner {
-      width: 100%;
-      background: #2b3c4e;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .news-mva-banner img {
-      max-width: 100%;
-      height: auto;
-      max-height: 84px;
-      display: block;
-      object-fit: contain;
-    }
-    .news-body {
-      padding: 14px 16px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      flex: 1;
-    }
-    .news-date {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #2b3c4e;
-    }
-    .news-title {
-      margin: 0;
-      font-size: 16.5px;
-      line-height: 1.3;
-      color: #1a1f14;
-    }
-    .news-text {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.44;
-      color: #3f4737;
-      flex: 1;
-    }
-    .news-link {
-      display: inline-block;
-      margin-top: 4px;
-      color: #2e6b1e;
-      font-weight: 700;
-      font-size: 12.5px;
-      text-decoration: none;
-    }
-    .news-link:hover {
-      text-decoration: underline;
-      color: #4b5320;
-    }
-
     #services-dropdown {
       display: none;
     }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 265px));
-      grid-template-rows: repeat(2, minmax(118px, auto));
+      grid-auto-rows: minmax(118px, auto);
       justify-content: start;
       gap: 12px;
       padding-top: 4px;
@@ -247,14 +155,12 @@
     @media (max-width: 1160px) {
       .cards-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: auto;
         justify-content: stretch;
       }
     }
     @media (max-width: 640px) {
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto;
         gap: 10px;
       }
     }
@@ -316,7 +222,7 @@
       pointer-events: none;
     }
     .kp-banner-box {
-      margin-top: 6px;
+      margin-top: 4px;
       background: #1b4b9c;
       border-radius: 6px;
       padding: 5px 8px;
@@ -326,6 +232,25 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
     }
     .kp-banner-img {
+      display: block;
+      max-width: 100%;
+      max-height: 44px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+    .mva-banner-box {
+      margin-top: 4px;
+      background: #2b3c4e;
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+    }
+    .mva-banner-img {
       display: block;
       max-width: 100%;
       max-height: 44px;
@@ -645,13 +570,6 @@
         <h1 class="center-banner-title">Ветерани Голосіївського району</h1>
       </div>
 
-      <section id="home-news-section" aria-label="Новини та події">
-        <div class="news-section-header">
-          <h2 class="news-section-title">Новини та події</h2>
-        </div>
-        <div id="news-grid" class="news-grid"></div>
-      </section>
-
       <section id="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
           <div class="card card-has-corner-icon clickable-card" onclick="toggleFormsPanel()">
@@ -721,6 +639,17 @@
               <img src="golos-logo.png" alt="Голосіївська РДА" class="kp-banner-img">
             </div>
             <a id="kp-card-link" href="https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu" target="_blank" rel="noopener" class="card-action" onclick="event.stopPropagation()">Відкрити довідник →</a>
+          </div>
+
+          <div id="mva-service-card" class="card clickable-card" onclick="openMvaPortal()">
+            <div>
+              <h3 id="mva-card-title">Міністерство у справах ветеранів України</h3>
+              <p id="mva-card-text">Офіційні новини, державні програми підтримки та інформація на порталі mva.gov.ua.</p>
+            </div>
+            <div class="mva-banner-box">
+              <img src="mva-logo.png" alt="Міністерство у справах ветеранів України" class="mva-banner-img">
+            </div>
+            <a id="mva-card-link" href="https://www.mva.gov.ua/" target="_blank" rel="noopener" class="card-action" onclick="event.stopPropagation()">Відкрити сайт Мінветеранів →</a>
           </div>
         </div>
 
@@ -805,16 +734,7 @@
     var activeDocIndex = 0;
     var currentDiyaIndex = 0;
     var kpPortalUrl = "https://golos.kyivcity.gov.ua/pro-raion/dovidnyk-raionu/komunalni-pidpryiemstva-raionu";
-
-    var fallbackMvaNews = [
-      {
-        date: "Мінветеранів • Актуально",
-        title: "Офіційні новини Міністерства у справах ветеранів України",
-        text: "Офіційні повідомлення, державні програми підтримки та актуальна інформація для ветеранів на порталі mva.gov.ua.",
-        url: "https://www.mva.gov.ua/",
-        image: ""
-      }
-    ];
+    var mvaPortalUrl = "https://www.mva.gov.ua/";
 
     function escapeHtml(str) {
       return String(str || "")
@@ -824,38 +744,30 @@
         .replace(/"/g, "&quot;");
     }
 
-    function renderNews(items) {
-      var grid = document.getElementById("news-grid");
-      if (!grid) return;
-      var list = Array.isArray(items) && items.length > 0 ? items.slice(0, 1) : fallbackMvaNews;
+    function openMvaPortal() {
+      window.open(mvaPortalUrl, "_blank", "noopener");
+    }
 
-      grid.innerHTML = list.map(function (item) {
-        var mediaHtml = item.image
-          ? '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.title) + '" class="news-card-img">'
-          : '<div class="news-mva-banner"><img src="mva-logo.png" alt="Міністерство у справах ветеранів України"></div>';
+    function applyNewsData(items) {
+      if (!Array.isArray(items) || items.length === 0) return;
+      var entry = items[0];
+      var titleEl = document.getElementById("mva-card-title");
+      var textEl = document.getElementById("mva-card-text");
+      var linkEl = document.getElementById("mva-card-link");
 
-        var linkHtml = item.url
-          ? (item.url.charAt(0) === "#"
-              ? '<a href="' + escapeHtml(item.url) + '" class="news-link" onclick="event.preventDefault(); openServices();">Відкрити сервіси →</a>'
-              : '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener" class="news-link">Читати на сайті Мінветеранів →</a>')
-          : "";
-
-        return (
-          '<article class="news-card">' +
-            mediaHtml +
-            '<div class="news-body">' +
-              '<span class="news-date">' + escapeHtml(item.date || "Мінветеранів") + '</span>' +
-              '<h3 class="news-title">' + escapeHtml(item.title || "") + '</h3>' +
-              '<p class="news-text">' + escapeHtml(item.text || "") + '</p>' +
-              linkHtml +
-            '</div>' +
-          '</article>'
-        );
-      }).join("");
+      if (entry.title && titleEl) {
+        titleEl.textContent = entry.title;
+      }
+      if (entry.text && textEl) {
+        textEl.textContent = entry.text;
+      }
+      if (entry.url && /^https?:\/\//i.test(entry.url)) {
+        mvaPortalUrl = entry.url;
+        if (linkEl) linkEl.href = entry.url;
+      }
     }
 
     function loadNewsFromJson() {
-      renderNews(fallbackMvaNews);
       if (typeof fetch !== "function") return;
       fetch("./news.json?v=" + Date.now(), { cache: "no-store" })
         .then(function (resp) {
@@ -863,12 +775,10 @@
           return resp.json();
         })
         .then(function (data) {
-          if (Array.isArray(data) && data.length > 0) {
-            renderNews(data);
-          }
+          applyNewsData(data);
         })
         .catch(function () {
-          renderNews(fallbackMvaNews);
+          // Залишаємо базові дані картки
         });
     }
 
@@ -948,13 +858,11 @@
 
     function showHome() {
       var dropdown = document.getElementById("services-dropdown");
-      var homeNewsSection = document.getElementById("home-news-section");
       var btnHome = document.getElementById("btn-home");
       var btnServices = document.getElementById("btn-services");
       var servicesArrow = document.getElementById("services-arrow");
 
       if (dropdown) dropdown.style.display = "none";
-      if (homeNewsSection) homeNewsSection.style.display = "block";
       if (btnServices) {
         btnServices.classList.remove("active");
         btnServices.setAttribute("aria-expanded", "false");
@@ -963,165 +871,4 @@
       if (btnHome) btnHome.classList.add("active");
     }
 
-    function openServices() {
-      var dropdown = document.getElementById("services-dropdown");
-      var homeNewsSection = document.getElementById("home-news-section");
-      var btnHome = document.getElementById("btn-home");
-      var btnServices = document.getElementById("btn-services");
-      var servicesArrow = document.getElementById("services-arrow");
-
-      if (homeNewsSection) homeNewsSection.style.display = "none";
-      if (dropdown) dropdown.style.display = "block";
-      if (btnServices) {
-        btnServices.classList.add("active");
-        btnServices.setAttribute("aria-expanded", "true");
-      }
-      if (servicesArrow) servicesArrow.style.transform = "rotate(180deg)";
-      if (btnHome) btnHome.classList.remove("active");
-    }
-
-    function toggleServices() {
-      var dropdown = document.getElementById("services-dropdown");
-      if (!dropdown) return;
-      var isOpen = window.getComputedStyle(dropdown).display === "block";
-      if (isOpen) {
-        showHome();
-      } else {
-        openServices();
-      }
-    }
-
-    function toggleFormsPanel() {
-      openServices();
-      var diyaSub = document.getElementById("diya-subwindows");
-      if (diyaSub) diyaSub.style.display = "none";
-      closeDiyaGuide();
-      var panel = document.getElementById("forms-panel");
-      if (!panel) return;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-        return;
-      }
-      panel.style.display = "block";
-      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    function closeFormsPanel() {
-      var panel = document.getElementById("forms-panel");
-      if (panel) panel.style.display = "none";
-    }
-
-    function renderDiyaMiniWindows() {
-      var grid = document.getElementById("diya-mini-grid");
-      var guide = document.getElementById("diya-guide");
-      if (!grid) return;
-      var guideOpen = guide && guide.style.display === "block";
-      grid.innerHTML = diyaDocuments.map(function (doc, idx) {
-        var isSelected = idx === activeDocIndex && guideOpen;
-        return (
-          '<button type="button" class="diya-mini-window' + (isSelected ? " active-doc" : "") + '" onclick="selectDiyaDocument(' + idx + ')">' +
-            '<span class="diya-mini-title">' + escapeHtml(doc.title) + '</span>' +
-            '<span class="diya-mini-sub">' + escapeHtml(doc.subtitle) + '</span>' +
-          '</button>'
-        );
-      }).join("");
-    }
-
-    function toggleDiyaSubwindows() {
-      openServices();
-      closeFormsPanel();
-      var box = document.getElementById("diya-subwindows");
-      if (!box) return;
-      if (box.style.display === "block") {
-        box.style.display = "none";
-        closeDiyaGuide();
-        return;
-      }
-      renderDiyaMiniWindows();
-      box.style.display = "block";
-      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    function closeDiyaSubwindows() {
-      var box = document.getElementById("diya-subwindows");
-      if (box) box.style.display = "none";
-      closeDiyaGuide();
-    }
-
-    function selectDiyaDocument(docIdx) {
-      activeDocIndex = docIdx;
-      currentDiyaIndex = 0;
-      var allSteps = document.getElementById("diya-all-steps");
-      var allBtn = document.getElementById("diya-all-btn");
-      var guide = document.getElementById("diya-guide");
-      if (allSteps) allSteps.style.display = "none";
-      if (allBtn) allBtn.textContent = "Показати всі кроки";
-      if (guide) {
-        guide.style.display = "block";
-        renderDiyaMiniWindows();
-        renderDiyaStep();
-        guide.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    function renderDiyaStep() {
-      var doc = diyaDocuments[activeDocIndex];
-      var step = doc.steps[currentDiyaIndex];
-      var total = doc.steps.length;
-      document.getElementById("diya-doc-name").textContent = doc.title;
-      document.getElementById("diya-step-title").textContent = step.title;
-      document.getElementById("diya-step-desc").textContent = step.desc;
-      var imgEl = document.getElementById("diya-step-img");
-      imgEl.src = step.img;
-      imgEl.alt = doc.title + " — " + step.title;
-      document.getElementById("diya-counter").textContent = (currentDiyaIndex + 1) + " / " + total;
-      document.getElementById("diya-prev").disabled = currentDiyaIndex === 0;
-      document.getElementById("diya-next").disabled = currentDiyaIndex === total - 1;
-    }
-
-    function closeDiyaGuide() {
-      var guide = document.getElementById("diya-guide");
-      var allSteps = document.getElementById("diya-all-steps");
-      var allBtn = document.getElementById("diya-all-btn");
-      if (guide) guide.style.display = "none";
-      if (allSteps) allSteps.style.display = "none";
-      if (allBtn) allBtn.textContent = "Показати всі кроки";
-      renderDiyaMiniWindows();
-    }
-
-    function changeDiyaStep(delta) {
-      var doc = diyaDocuments[activeDocIndex];
-      var nextIdx = currentDiyaIndex + delta;
-      if (nextIdx >= 0 && nextIdx < doc.steps.length) {
-        currentDiyaIndex = nextIdx;
-        renderDiyaStep();
-      }
-    }
-
-    function toggleAllDiyaSteps() {
-      var allSteps = document.getElementById("diya-all-steps");
-      var allBtn = document.getElementById("diya-all-btn");
-      if (!allSteps || !allBtn) return;
-      if (allSteps.style.display === "block") {
-        allSteps.style.display = "none";
-        allBtn.textContent = "Показати всі кроки";
-        return;
-      }
-      var doc = diyaDocuments[activeDocIndex];
-      allSteps.innerHTML = doc.steps.map(function (st) {
-        return (
-          '<div class="all-step-item">' +
-            '<div><strong>' + escapeHtml(st.title) + '</strong> — ' + escapeHtml(st.desc) + '</div>' +
-            '<img src="' + escapeHtml(st.img) + '" alt="' + escapeHtml(doc.title + " — " + st.title) + '">' +
-          '</div>'
-        );
-      }).join("");
-      allSteps.style.display = "block";
-      allBtn.textContent = "Сховати всі кроки";
-    }
-
-    loadNewsFromJson();
-    loadKpFromJson();
-  </script>
-</body>
-</html>
+    function open

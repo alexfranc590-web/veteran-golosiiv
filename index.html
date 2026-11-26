@@ -77,7 +77,8 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     .a11y-btn,
-    .lang-btn {
+    .lang-btn,
+    .reload-btn {
       background: transparent;
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.25);
@@ -89,10 +90,21 @@
       min-height: 30px;
       line-height: 1.1;
       user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
     .a11y-btn:hover,
-    .lang-btn:hover {
+    .lang-btn:hover,
+    .reload-btn:hover {
       background: rgba(255, 255, 255, 0.14);
+    }
+    .reload-btn {
+      background: rgba(107, 142, 35, 0.45);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+    .reload-btn:hover {
+      background: rgba(107, 142, 35, 0.7);
     }
     .lang-btn.active {
       background: #ffffff;
@@ -409,12 +421,17 @@
           </button>
         </nav>
 
-        <div class="a11y-lang-bar" role="group" aria-label="Розмір тексту та мова">
+        <div class="a11y-lang-bar" role="group" aria-label="Розмір тексту, мова та оновлення">
           <button type="button" class="a11y-btn" onclick="changeFontSize(-2)" aria-label="Зменшити текст" title="Зменшити текст">A-</button>
           <button type="button" class="a11y-btn" onclick="changeFontSize(2)" aria-label="Збільшити текст" title="Збільшити текст">A+</button>
           <span class="a11y-divider" aria-hidden="true"></span>
           <button type="button" id="lang-btn-uk" class="lang-btn active" onclick="setLanguage('uk')">УКР</button>
           <button type="button" id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</button>
+          <span class="a11y-divider" aria-hidden="true"></span>
+          <button type="button" id="reload-page-btn" class="reload-btn" onclick="reloadPageSafely()" aria-label="Оновити сторінку" title="Оновити сторінку">
+            <span aria-hidden="true">↻</span>
+            <span id="reload-btn-label">Оновити</span>
+          </button>
         </div>
       </div>
 
@@ -613,6 +630,7 @@
       uk: {
         pageTitle: "Ветеран Голосіївського району",
         servicesBtn: "Сервіси",
+        reloadBtn: "Оновити",
         heroTitle: "Ветерани Голосіївського району",
         formsTitle: "Зразки заяв",
         formsDesc: "Заяви на допомогу, лікування, реабілітацію та звернення до установ району.",
@@ -661,6 +679,7 @@
       en: {
         pageTitle: "Veteran — Holosiivskyi District",
         servicesBtn: "Services",
+        reloadBtn: "Reload",
         heroTitle: "Veterans of Holosiivskyi District",
         formsTitle: "Application Templates",
         formsDesc: "Applications for assistance, medical care, rehabilitation, and inquiries to district institutions.",
@@ -766,6 +785,19 @@
       applyFontSize(currentFontPx + delta);
     }
 
+    function reloadPageSafely() {
+      try {
+        showHome();
+        closeFormsPanel();
+        closeDiyaSubwindows();
+        var url = new URL(window.location.href);
+        url.searchParams.set("refresh", String(Date.now()));
+        window.location.replace(url.toString());
+      } catch (e) {
+        window.location.reload();
+      }
+    }
+
     function setLanguage(lang) {
       currentLang = lang === "en" ? "en" : "uk";
       document.documentElement.lang = currentLang;
@@ -779,6 +811,7 @@
 
       var map = {
         "services-btn-label": t.servicesBtn,
+        "reload-btn-label": t.reloadBtn,
         "hero-title": t.heroTitle,
         "card-forms-title": t.formsTitle,
         "card-forms-desc": t.formsDesc,

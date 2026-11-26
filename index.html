@@ -32,7 +32,7 @@
       width: 100%;
     }
     main {
-      padding: 16px 0 40px;
+      padding: 14px 0 28px;
       flex: 1;
     }
     .top-bar-row {
@@ -48,7 +48,7 @@
     @media (min-width: 761px) {
       .top-bar-row {
         position: absolute;
-        top: 10px;
+        top: 6px;
         left: 16px;
         right: 16px;
         margin-bottom: 0;
@@ -150,8 +150,8 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin: 12px 0 36px;
-      padding-top: 34px;
+      margin: 4px 0 18px;
+      padding-top: 26px;
       flex-wrap: wrap;
     }
     .brand {
@@ -162,8 +162,8 @@
       cursor: pointer;
     }
     .brand-icon {
-      width: 96px;
-      height: 96px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255, 255, 255, 0.85);
@@ -180,9 +180,36 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
     @media (max-width: 760px) {
-      .hero-heading-row { flex-direction: column; gap: 10px; margin: 6px 0 24px; padding-top: 0; }
-      .brand-icon { width: 82px; height: 82px; }
+      .hero-heading-row { flex-direction: column; gap: 10px; margin: 6px 0 16px; padding-top: 0; }
+      .brand-icon { width: 78px; height: 78px; }
       .center-banner-title { font-size: 1.375rem; padding: 0 6px; }
+    }
+    #home-hero-photo {
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.92);
+      border-top: 4px solid #4b5320;
+      border-radius: 12px;
+      padding: 10px 10px 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+      text-align: center;
+    }
+    .home-photo-img {
+      display: block;
+      width: 100%;
+      height: 410px;
+      object-fit: cover;
+      object-position: center 30%;
+      border-radius: 8px;
+    }
+    .home-photo-caption {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2c3514;
+    }
+    @media (max-width: 760px) {
+      .home-photo-img { height: 240px; }
     }
     #services-dropdown { display: none; }
     .cards-grid {
@@ -408,6 +435,11 @@
         <h1 id="hero-title" class="center-banner-title">Ветерани Голосіївського району</h1>
       </div>
 
+      <section id="home-hero-photo" aria-label="Рада ветеранів Голосіївського району">
+        <img src="rada-veteraniv.jpg" alt="Рада ветеранів Голосіївського району м. Києва" class="home-photo-img">
+        <div id="home-photo-caption" class="home-photo-caption">Рада ветеранів Голосіївського району м. Києва</div>
+      </section>
+
       <section id="services-dropdown" aria-label="Сервіси для ветеранів">
         <div class="cards-grid">
           <div class="card card-has-corner-icon clickable-card" onclick="toggleFormsPanel()">
@@ -591,6 +623,7 @@
         pageTitle: "Ветеран Голосіївського району",
         servicesBtn: "Сервіси",
         heroTitle: "Ветерани Голосіївського району",
+        photoCaption: "Рада ветеранів Голосіївського району м. Києва",
         formsTitle: "Зразки заяв",
         formsDesc: "Заяви на допомогу, лікування, реабілітацію та звернення до установ району.",
         formsAction: "Переглянути перелік заяв →",
@@ -639,6 +672,7 @@
         pageTitle: "Veteran — Holosiivskyi District",
         servicesBtn: "Services",
         heroTitle: "Veterans of Holosiivskyi District",
+        photoCaption: "Veterans Council of Holosiivskyi District, Kyiv",
         formsTitle: "Application Templates",
         formsDesc: "Applications for assistance, medical care, rehabilitation, and inquiries to district institutions.",
         formsAction: "View list of applications →",
@@ -757,6 +791,7 @@
       var map = {
         "services-btn-label": t.servicesBtn,
         "hero-title": t.heroTitle,
+        "home-photo-caption": t.photoCaption,
         "card-forms-title": t.formsTitle,
         "card-forms-desc": t.formsDesc,
         "card-forms-action": t.formsAction,
@@ -881,10 +916,12 @@
     }
 
     function showHome() {
+      var homePhoto = document.getElementById("home-hero-photo");
       var dropdown = document.getElementById("services-dropdown");
       var btnHome = document.getElementById("btn-home");
       var btnServices = document.getElementById("btn-services");
       var servicesArrow = document.getElementById("services-arrow");
+      if (homePhoto) homePhoto.style.display = "block";
       if (dropdown) dropdown.style.display = "none";
       if (btnServices) { btnServices.classList.remove("active"); btnServices.setAttribute("aria-expanded", "false"); }
       if (servicesArrow) servicesArrow.style.transform = "rotate(0deg)";
@@ -892,10 +929,12 @@
     }
 
     function openServices() {
+      var homePhoto = document.getElementById("home-hero-photo");
       var dropdown = document.getElementById("services-dropdown");
       var btnHome = document.getElementById("btn-home");
       var btnServices = document.getElementById("btn-services");
       var servicesArrow = document.getElementById("services-arrow");
+      if (homePhoto) homePhoto.style.display = "none";
       if (dropdown) dropdown.style.display = "block";
       if (btnServices) { btnServices.classList.add("active"); btnServices.setAttribute("aria-expanded", "true"); }
       if (servicesArrow) servicesArrow.style.transform = "rotate(180deg)";
